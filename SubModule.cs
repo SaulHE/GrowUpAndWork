@@ -38,8 +38,8 @@ namespace GrowUpAndWork
             }
             catch (Exception e)
             {
-                InformationManager.DisplayMessage(new InformationMessage(e.ToString()));
-                throw;
+                _log.WriteLog($"ERROR!!!==========>:{e.ToString()}");
+                throw e;
             }
         }
 
@@ -95,7 +95,7 @@ namespace GrowUpAndWork
                     growUpAndWorkCampaignBehaviour.PrintData();
 
                     //grow up 1 year up each cycle
-                    if (incResult >= 2)
+                    if (incResult >= 25)
                     {
                         growUpAndWorkCampaignBehaviour.initCycleCount();
                         Hero.MainHero.Children.ForEach((Hero child) =>
@@ -106,7 +106,7 @@ namespace GrowUpAndWork
                             _log.WriteLog($"Your child's mother is {child.Mother.Name}");
                             if (child.Age < 18)
                             {
-                                child.BirthDay = HeroHelper.GetRandomBirthDayForAge((int)child.Age + 1);
+                                child.BirthDay = HeroHelper.GetRandomBirthDayForAge((int) child.Age + 1);
                                 _log.WriteLog($"Now your child: {child.Name} is {child.Age} years old");
                                 InformationManager.AddQuickInformation(
                                     new TextObject($"Now your child: {child.Name} is {(int) child.Age} years old"), 0,
@@ -114,7 +114,6 @@ namespace GrowUpAndWork
 
                                 if ((int) child.Age == 14 && child.IsChild == false)
                                 {
-
                                     _log.WriteLog($"Before inheritance");
                                     InheritHelper.Inherit(child);
                                     _log.WriteLog($"after inheritance");
@@ -129,40 +128,50 @@ namespace GrowUpAndWork
                                         new TextObject(
                                             $"Your child inherits from his parents and become capable in many fields"),
                                         0, null, "event:/ui/notification/quest_finished");
-                                    Hero.MainHero.BirthDay = HeroHelper.GetRandomBirthDayForAge((int)Hero.MainHero.Age + 1);
+                                    Hero.MainHero.BirthDay =
+                                        HeroHelper.GetRandomBirthDayForAge((int) Hero.MainHero.Age + 1);
                                     child.Mother.BirthDay =
                                         HeroHelper.GetRandomBirthDayForAge((int) child.Mother.Age + 1);
-                                    InformationManager.AddQuickInformation(new TextObject("You are 1 year older due to the growth of your children") , 0, null, "event:/ui/notification/quest_update");
-                                    _log.WriteLog("You and your wife are 1 year older due to the growth of your children");
+                                    InformationManager.AddQuickInformation(
+                                        new TextObject("You are 1 year older due to the growth of your children"), 0,
+                                        null, "event:/ui/notification/quest_update");
+                                    _log.WriteLog(
+                                        "You and your wife are 1 year older due to the growth of your children");
 
 
-                                    foreach (Hero sibling in child.Siblings )
+                                    foreach (Hero sibling in child.Siblings)
                                     {
                                         if (sibling.Age > child.Age)
                                         {
                                             sibling.BirthDay =
                                                 HeroHelper.GetRandomBirthDayForAge((int) sibling.Age + 1);
                                         }
-                                        
                                     }
 
-                                    
-                                    InformationManager.AddQuickInformation(new TextObject("His older siblings are 1 year older due to the growth of their sibling"), 0, null, "event:/ui/notification/quest_update");
-                                    _log.WriteLog("His older siblings are 1 year older due to the growth of their sibling");
-                                    child.Level = 0;
+
+                                    InformationManager.AddQuickInformation(
+                                        new TextObject(
+                                            "His older siblings are 1 year older due to the growth of their sibling"),
+                                        0, null, "event:/ui/notification/quest_update");
+                                    _log.WriteLog(
+                                        "His older siblings are 1 year older due to the growth of their sibling");
                                     child.HeroDeveloper.UnspentFocusPoints += 15;
                                     child.HeroDeveloper.UnspentAttributePoints += 20;
                                     _log.WriteLog("starting add the negative skillXpProgress back");
                                     foreach (SkillObject skillIterator in DefaultSkills.GetAllSkills())
                                     {
                                         int thisSkillXp = child.HeroDeveloper.GetSkillXpProgress(skillIterator);
-                                        _log.WriteLog($"Your child {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
+                                        _log.WriteLog(
+                                            $"Your child {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
                                         if (thisSkillXp < 0)
                                         {
                                             _log.WriteLog("enter the adding part");
-                                            child.HeroDeveloper.AddSkillXp(skillIterator, thisSkillXp * -1, false, false);
+                                            child.HeroDeveloper.AddSkillXp(skillIterator, thisSkillXp * -1 + 1, false,
+                                                false);
                                         }
-                                        _log.WriteLog($"After Adding, {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
+
+                                        _log.WriteLog(
+                                            $"After Adding, {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
                                     }
                                 }
                             }

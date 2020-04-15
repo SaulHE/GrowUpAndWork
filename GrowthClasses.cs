@@ -15,7 +15,7 @@ namespace GrowUpAndWork.GrowthClasses
             {
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
-                    targetInheriter.SetSkillValue(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 3 + targetInheriter.Father.GetSkillValue(skillIT) / 5);
+                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 3 + targetInheriter.Father.GetSkillValue(skillIT) / 5);
                 }
                 
             }
@@ -23,7 +23,7 @@ namespace GrowUpAndWork.GrowthClasses
             {
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
-                    targetInheriter.SetSkillValue(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 5 + targetInheriter.Father.GetSkillValue(skillIT) / 3);
+                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 5 + targetInheriter.Father.GetSkillValue(skillIT) / 3);
                 }
                 
             }
