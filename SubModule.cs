@@ -95,11 +95,15 @@ namespace GrowUpAndWork
                     growUpAndWorkCampaignBehaviour.PrintData();
 
                     //grow up 1 year up each cycle
-                    if (incResult >= 25)
+                    if (incResult >= 2)
                     {
                         growUpAndWorkCampaignBehaviour.initCycleCount();
                         Hero.MainHero.Children.ForEach((Hero child) =>
                         {
+                            _log.WriteLog($"Handling Your child {child.Name}");
+                            _log.WriteLog($"Your child is {child.Age} years old before");
+                            _log.WriteLog($"Your child's father is {child.Father.Name}");
+                            _log.WriteLog($"Your child's mother is {child.Mother.Name}");
                             if (child.Age < 18)
                             {
                                 child.BirthDay = HeroHelper.GetRandomBirthDayForAge((int)child.Age + 1);
@@ -108,7 +112,7 @@ namespace GrowUpAndWork
                                     new TextObject($"Now your child: {child.Name} is {(int) child.Age} years old"), 0,
                                     null, "event:/ui/notification/quest_update");
 
-                                if ((int) child.Age == 13 && child.IsChild == false)
+                                if ((int) child.Age == 14 && child.IsChild == false)
                                 {
 
                                     _log.WriteLog($"Before inheritance");
@@ -148,13 +152,17 @@ namespace GrowUpAndWork
                                     child.Level = 0;
                                     child.HeroDeveloper.UnspentFocusPoints += 15;
                                     child.HeroDeveloper.UnspentAttributePoints += 20;
+                                    _log.WriteLog("starting add the negative skillXpProgress back");
                                     foreach (SkillObject skillIterator in DefaultSkills.GetAllSkills())
                                     {
                                         int thisSkillXp = child.HeroDeveloper.GetSkillXpProgress(skillIterator);
+                                        _log.WriteLog($"Your child {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
                                         if (thisSkillXp < 0)
                                         {
-                                            child.AddSkillXp(skillIterator, Math.Abs(thisSkillXp));
+                                            _log.WriteLog("enter the adding part");
+                                            child.HeroDeveloper.AddSkillXp(skillIterator, thisSkillXp * -1, false, false);
                                         }
+                                        _log.WriteLog($"After Adding, {child.Name}'s {skillIterator.Name} has {thisSkillXp} xp");
                                     }
                                 }
                             }

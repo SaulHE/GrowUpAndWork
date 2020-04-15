@@ -39,7 +39,7 @@ namespace GrowUpAndWork.Behaviour
             Log log = new Log(logFileName);
             int res = this._growthData.increaseCycleCount(); 
             log.WriteLog($"The beenRunBefore has been set to {this._growthData.SetBeenRunBefore()}"); 
-            log.WriteLog($"The CycleCount value now is ${res}");
+            log.WriteLog($"The CycleCount value now is {res}");
             return res;
 
         }

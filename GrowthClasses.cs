@@ -9,13 +9,13 @@ namespace GrowUpAndWork.GrowthClasses
     {
         public static void Inherit(Hero targetInheriter)
         {
+            
             targetInheriter.ClearSkills();
             if (targetInheriter.IsFemale)
             {
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
-                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,  targetInheriter.Mother.GetSkillValue(skillIT) / 3);
-                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,  targetInheriter.Father.GetSkillValue(skillIT) / 5);
+                    targetInheriter.SetSkillValue(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 3 + targetInheriter.Father.GetSkillValue(skillIT) / 5);
                 }
                 
             }
@@ -23,8 +23,7 @@ namespace GrowUpAndWork.GrowthClasses
             {
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
-                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,  targetInheriter.Mother.GetSkillValue(skillIT) / 5);
-                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,   targetInheriter.Father.GetSkillValue(skillIT) / 3);
+                    targetInheriter.SetSkillValue(skillIT, targetInheriter.Mother.GetSkillValue(skillIT) / 5 + targetInheriter.Father.GetSkillValue(skillIT) / 3);
                 }
                 
             }
