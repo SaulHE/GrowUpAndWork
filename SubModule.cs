@@ -46,18 +46,26 @@ namespace GrowUpAndWork
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
             base.OnGameStart(game, gameStarterObject);
+            try
+            {
+                if (!(game.GameType is Campaign))
+                    return;
+                CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
 
-            if (!(game.GameType is Campaign))
-                return;
-            CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
+                // initiallize the SaveCampaignBehaviour for the cycle count every 40 days.
+                GrowUpAndWorkCampaignBehaviour gInstance = GrowUpAndWorkCampaignBehaviour.Instance;
+                gameInitializer.AddBehavior(gInstance);
+                gameStarterObject.AddModel(new NormalAgeModel());
 
-            // initiallize the SaveCampaignBehaviour for the cycle count every 40 days.
-            GrowUpAndWorkCampaignBehaviour gInstance = GrowUpAndWorkCampaignBehaviour.Instance;
-            gameInitializer.AddBehavior(gInstance);
-            gameStarterObject.AddModel(new NormalAgeModel());
-
-            _log.WriteLog("Campaign Game Started");
-            Campaign.Current.DailyTickEvent.AddHandler(ChildrenGrowthBoostEventHandlers.DailyChildrenGrowthTickHandler);
+                _log.WriteLog("Campaign Game Started");
+                Campaign.Current.DailyTickEvent.AddHandler(ChildrenGrowthBoostEventHandlers
+                    .DailyChildrenGrowthTickHandler);
+            }
+            catch (Exception e)
+            {
+                _log.WriteLog($"{e.ToString()}");
+                throw e;
+            }
         }
     }
 
@@ -93,9 +101,19 @@ namespace GrowUpAndWork
                         GrowUpAndWorkCampaignBehaviour.MyInstance;
                     int incResult = growUpAndWorkCampaignBehaviour.IncreaseCount();
                     growUpAndWorkCampaignBehaviour.PrintData();
+                    int cycleCeiling = 0;
+
+                    if (Settings.IsDebugMode)
+                    {
+                        cycleCeiling = 2;
+                    }
+                    else
+                    {
+                        cycleCeiling = 25;
+                    }
 
                     //grow up 1 year up each cycle
-                    if (incResult >= 25)
+                    if (incResult >= cycleCeiling)
                     {
                         growUpAndWorkCampaignBehaviour.initCycleCount();
                         Hero.MainHero.Children.ForEach((Hero child) =>
@@ -112,9 +130,12 @@ namespace GrowUpAndWork
                                     new TextObject($"Now your child: {child.Name} is {(int) child.Age} years old"), 0,
                                     null, "event:/ui/notification/quest_update");
 
-                                if ((int) child.Age == 14 && child.IsChild == false)
+                                if ((int) child.Age == Settings.BecomeHeroAge && child.IsChild == false)
                                 {
                                     _log.WriteLog($"Before inheritance");
+                                    child.ClearSkills();
+                                    child.HeroDeveloper.ClearHeroLevel();
+                                    _log.WriteLog($"{child.Name}'s skill is level, now is {child.Level}");
                                     InheritHelper.Inherit(child);
                                     _log.WriteLog($"after inheritance");
 
@@ -130,13 +151,16 @@ namespace GrowUpAndWork
                                         0, null, "event:/ui/notification/quest_finished");
                                     Hero.MainHero.BirthDay =
                                         HeroHelper.GetRandomBirthDayForAge((int) Hero.MainHero.Age + 1);
-                                    child.Mother.BirthDay =
-                                        HeroHelper.GetRandomBirthDayForAge((int) child.Mother.Age + 1);
+                                    if (child.Mother != null)
+                                    {
+                                        child.Mother.BirthDay =
+                                            HeroHelper.GetRandomBirthDayForAge((int) child.Mother.Age + 1);
+                                    }
+
                                     InformationManager.AddQuickInformation(
                                         new TextObject("You are 1 year older due to the growth of your children"), 0,
                                         null, "event:/ui/notification/quest_update");
-                                    _log.WriteLog(
-                                        "You and your wife are 1 year older due to the growth of your children");
+                                    _log.WriteLog("You and your wife are 1 year older due to the growth of your children");
 
 
                                     foreach (Hero sibling in child.Siblings)
@@ -151,10 +175,10 @@ namespace GrowUpAndWork
 
                                     InformationManager.AddQuickInformation(
                                         new TextObject(
-                                            "His older siblings are 1 year older due to the growth of their sibling"),
+                                            $"{child.Name} older siblings are 1 year older due to the growth of their sibling"),
                                         0, null, "event:/ui/notification/quest_update");
                                     _log.WriteLog(
-                                        "His older siblings are 1 year older due to the growth of their sibling");
+                                        $"${child.Name}'s older siblings are 1 year older due to the growth of their sibling");
                                     child.HeroDeveloper.UnspentFocusPoints += 15;
                                     child.HeroDeveloper.UnspentAttributePoints += 20;
                                     _log.WriteLog("starting add the negative skillXpProgress back");
@@ -183,7 +207,7 @@ namespace GrowUpAndWork
             {
                 // InformationManager.DisplayMessage(new InformationMessage(e.ToString(), Colors.Red));
                 _log.WriteLog("Error++++" + e.ToString());
-                throw new NotImplementedException();
+                throw e;
             }
         }
     }
