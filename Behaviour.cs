@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TaleWorlds.SaveSystem;
 using GrowUpAndWork.GrowthClasses;
-using TaleWorlds.CampaignSystem;
 using GrowUpAndWork.LightLogger;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 
 namespace GrowUpAndWork.Behaviour

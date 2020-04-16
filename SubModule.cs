@@ -7,33 +7,48 @@ using System.Runtime.CompilerServices;
 using GrowUpAndWork.LightLogger;
 using GrowUpAndWork.Behaviour;
 using GrowUpAndWork.GrowthClasses;
+using HarmonyLib;
 using Helpers;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
+using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 using TaleWorlds.SaveSystem;
+using Module = TaleWorlds.MountAndBlade.Module;
+using ModLib.GUI.GauntletUI;
 
 namespace GrowUpAndWork
 {
     public class SubModule : MBSubModuleBase
     {
-        private String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+        public static String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+        public static string ModuleFolderName { get; } = "GrowUpAndWork";
         private Log _log;
 
         protected override void OnSubModuleLoad()
         {
-            // Module.CurrentModule.AddInitialStateOption(new InitialStateOption("TestMainMenuOption", new TextObject("Click Me!", null), 9990,
-            //     () =>
-            //     {
-            //         InformationManager.DisplayMessage(new InformationMessage("Hello World!"));
-            //     }, false));
-            this._log = new Log(logFileName);
-            _log.WriteLog("1");
+            /*
+            Module.CurrentModule.AddInitialStateOption(new InitialStateOption("TestMainMenuOption", new TextObject("Click Me!", null), 9990,
+                () =>
+                {
+                    InformationManager.DisplayMessage(new InformationMessage("Hello World!"));
+                }, false));
+            */
             try
             {
+                this._log = new Log(logFileName);
+                Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
+                harmony.PatchAll();
+                Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu", new TextObject("Mod Options"), 9990,
+                    () =>
+                    {
+                        ScreenManager.PushScreen(new ModOptionsGauntletScreen());
+                    } , false));
+                
+                
                 _log.WriteLog("SubModuleLoaded");
             }
             catch (Exception e)
