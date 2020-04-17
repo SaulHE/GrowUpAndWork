@@ -46,9 +46,6 @@ namespace GrowUpAndWork
 
                 SettingsDatabase.SaveSettings(SettingInstance);
 
-                ModDebug.WriteLog("yes");
-
-                
                 // add the screen
                 Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
                     new TextObject("Mod Options"), 9990,
@@ -56,6 +53,7 @@ namespace GrowUpAndWork
                 
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
+                ModDebug.WriteLog("Mod Loaded");
                 
             }
             catch (Exception e)

@@ -6,7 +6,7 @@ namespace GrowUpAndWork.LightLogger
 {
     public class Log
     {
-        private string _logFileName = "";
+        private string _logFileName;
 
         public Log(string logFileName)
         {
@@ -24,7 +24,7 @@ namespace GrowUpAndWork.LightLogger
 
         public void WriteLog(string msg)
         {
-            using (StreamWriter sw = new StreamWriter(_logFileName, true))
+            using (StreamWriter sw = new StreamWriter(File.Open(_logFileName, FileMode.Open, FileAccess.Write, FileShare.ReadWrite)))
             {
                 sw.WriteLine(DateTime.Now.ToString() + ":" + msg);
                 sw.WriteLine("---------------------------------------------------------");
