@@ -1,10 +1,10 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- using GrowUpAndWork.FileDatabase;
- using TaleWorlds.Engine.Screens;
+using ModLib;
+using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 
 namespace ModLib.GUI.ViewModels
@@ -27,10 +27,10 @@ namespace ModLib.GUI.ViewModels
                 {
                     _textInput = value;
                     OnPropertyChanged();
-
                 }
             }
         }
+
         [DataSourceProperty]
         public string TitleText
         {
@@ -41,6 +41,7 @@ namespace ModLib.GUI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         [DataSourceProperty]
         public string DescriptionText
         {
@@ -51,12 +52,10 @@ namespace ModLib.GUI.ViewModels
                 OnPropertyChanged();
             }
         }
-        [DataSourceProperty]
-        public SettingType SettingType => SettingProperty.SettingType;
-        [DataSourceProperty]
-        public float MinValue => SettingProperty.SettingAttribute.EditableMinValue;
-        [DataSourceProperty]
-        public float MaxValue => SettingProperty.SettingAttribute.EditableMaxValue;
+
+        [DataSourceProperty] public SettingType SettingType => SettingProperty.SettingType;
+        [DataSourceProperty] public float MinValue => SettingProperty.SettingAttribute.EditableMinValue;
+        [DataSourceProperty] public float MaxValue => SettingProperty.SettingAttribute.EditableMaxValue;
 
         public EditValueVM(SettingProperty settingProperty)
         {
@@ -70,7 +69,8 @@ namespace ModLib.GUI.ViewModels
             base.RefreshValues();
 
             TitleText = $"Edit \"{SettingProperty.Name}\"";
-            DescriptionText = $"Edit the value for \"{SettingProperty.Name}\".\nThe minimum value is {SettingProperty.SettingAttribute.EditableMinValue} and the maximum value is {SettingProperty.SettingAttribute.EditableMaxValue}.";
+            DescriptionText =
+                $"Edit the value for \"{SettingProperty.Name}\".\nThe minimum value is {SettingProperty.SettingAttribute.EditableMinValue} and the maximum value is {SettingProperty.SettingAttribute.EditableMaxValue}.";
             TextInput = SettingProperty.ValueString;
             OnPropertyChanged("SettingType");
         }

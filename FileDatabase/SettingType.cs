@@ -1,4 +1,4 @@
-﻿﻿namespace GrowUpAndWork.FileDatabase
+﻿﻿namespace ModLib
 {
     public enum SettingType
     {

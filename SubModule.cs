@@ -9,6 +9,7 @@ using GrowUpAndWork.Behaviour;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
 using Helpers;
+using ModLib;
 using ModLib.Debugging;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -26,6 +27,7 @@ namespace GrowUpAndWork
     public class SubModule : MBSubModuleBase
     {
         public static string ModuleFolderName { get; } = "GrowUpAndWork";
+
         protected override void OnSubModuleLoad()
         {
             /*
@@ -37,12 +39,22 @@ namespace GrowUpAndWork
             */
             try
             {
+                FileDatabase.Initialise("GrowUpAndWork");
+                SettingClass SettingInstance = FileDatabase.Get<SettingClass>(SettingClass.InstanceID);
+                if (SettingInstance == null) SettingInstance = new SettingClass();
+                SettingsDatabase.RegisterSettings(SettingInstance);
+
+                SettingsDatabase.SaveSettings(SettingInstance);
+
+                ModDebug.WriteLog("yes");
+
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
                 // add the screen
                 // Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
                 //     new TextObject("Mod Options"), 9990,
                 //     () => { ScreenManager.PushScreen(new ModOptionsGauntletScreen()); }, false));
+                
             }
             catch (Exception e)
             {
@@ -57,11 +69,12 @@ namespace GrowUpAndWork
             {
                 return;
             }
+
             try
             {
                 base.OnGameStart(game, gameStarterObject);
-                
-                
+
+
                 if (!(game.GameType is Campaign))
                     return;
                 CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
@@ -74,5 +87,4 @@ namespace GrowUpAndWork
             }
         }
     }
-    
 }

@@ -1,11 +1,11 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
- using GrowUpAndWork.FileDatabase;
- using TaleWorlds.GauntletUI;
+using ModLib;
+using TaleWorlds.GauntletUI;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 
@@ -13,12 +13,9 @@ namespace ModLib.GUI.Views
 {
     public class EditValueTextWidget : EditableTextWidget
     {
-        [DataSourceProperty]
-        public SettingType SettingType { get; set; } = SettingType.Float;
-        [DataSourceProperty]
-        public float MaxValue { get; set; } = 0f;
-        [DataSourceProperty]
-        public float MinValue { get; set; } = 0f;
+        [DataSourceProperty] public SettingType SettingType { get; set; } = SettingType.Float;
+        [DataSourceProperty] public float MaxValue { get; set; } = 0f;
+        [DataSourceProperty] public float MinValue { get; set; } = 0f;
 
         public EditValueTextWidget(UIContext context) : base(context)
         {
@@ -39,7 +36,7 @@ namespace ModLib.GUI.Views
                         if (SettingType == SettingType.Float)
                         {
                             //Handle input for float types
-                            if (key == (int)KeyCodes.Decimal)
+                            if (key == (int) KeyCodes.Decimal)
                             {
                                 if (RealText.Count('.') >= 1)
                                     continue;
@@ -48,9 +45,10 @@ namespace ModLib.GUI.Views
                         else if (SettingType == SettingType.Int)
                         {
                             //Handle input for int types.
-                            if (key == (int)KeyCodes.Decimal)
+                            if (key == (int) KeyCodes.Decimal)
                                 continue;
                         }
+
                         base.HandleInput(lastKeysPressed);
                         float value;
                         float.TryParse(RealText, out value);

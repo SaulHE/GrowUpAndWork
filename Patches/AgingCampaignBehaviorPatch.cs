@@ -18,7 +18,7 @@ namespace GrowUpAndWork.Patches
             if (Hero.MainHero.Children.Count != 0)
             {
                 int cycleCeiling = 0;
-                if (Settings.IsDebugMode == true)
+                if (SettingClass.Instance.IsDebugMode == true)
                 {
                     cycleCeiling = 2;
                 }

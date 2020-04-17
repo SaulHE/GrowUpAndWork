@@ -1,7 +1,8 @@
 ﻿﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using GrowUpAndWork.LightLogger;
+ using GrowUpAndWork;
+ using GrowUpAndWork.LightLogger;
 using TaleWorlds.Library;
 
 namespace ModLib.Debugging
@@ -18,8 +19,8 @@ namespace ModLib.Debugging
             if (string.IsNullOrWhiteSpace(title))
                 title = "";
             MessageBox.Show($"{message}\n\n{exception?.ToStringFull()}", title);
-            
-            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+
+            String logFileName = SettingClass.Instance.LogFileName;
             Log logger = new Log(logFileName);
             logger.WriteLog("Error!!!!!!!!!!!!!!==============>");
             logger.WriteLog($"message: {message}, title:{title}, {exception}");
@@ -27,7 +28,7 @@ namespace ModLib.Debugging
 
         public static void WriteLog(string message, string title = "")
         {
-            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+            String logFileName = SettingClass.Instance.LogFileName;
             Log logger = new Log(logFileName);
             logger.WriteLog($"title:{title}, This is a pure log message: {message} ");
         }
@@ -40,7 +41,7 @@ namespace ModLib.Debugging
             }
             MessageBox.Show(message, title);
             
-            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+            String logFileName = SettingClass.Instance.LogFileName;
             Log logger = new Log(logFileName);
             logger.WriteLog($"{title}, message is: {message}");
         }

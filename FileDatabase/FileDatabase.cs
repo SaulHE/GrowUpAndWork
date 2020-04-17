@@ -7,12 +7,14 @@ using System.Xml.Serialization;
 using ModLib.Debugging;
 using ModLib.Interfaces;
 
-namespace GrowUpAndWork.FileDatabase
+namespace ModLib
 {
     public static class FileDatabase
     {
         private static readonly string LoadablesFolderName = "Loadables";
-        public static Dictionary<Type, Dictionary<string, ISerialisableFile>> Data { get; } = new Dictionary<Type, Dictionary<string, ISerialisableFile>>();
+
+        public static Dictionary<Type, Dictionary<string, ISerialisableFile>> Data { get; } =
+            new Dictionary<Type, Dictionary<string, ISerialisableFile>>();
 
         /// <summary>
         /// Returns the ISerialisabeFile of type T with the given ID.
@@ -28,7 +30,7 @@ namespace GrowUpAndWork.FileDatabase
             if (!Data[typeof(T)].ContainsKey(id))
                 return default(T);
 
-            return (T)Data[typeof(T)][id];
+            return (T) Data[typeof(T)][id];
         }
 
         /// <summary>
@@ -46,8 +48,10 @@ namespace GrowUpAndWork.FileDatabase
             }
             catch (Exception ex)
             {
-                ModDebug.ShowError($"An error occurred whilst trying to load files for module: {moduleName}", "Error occurred during loading files", ex);
+                ModDebug.ShowError($"An error occurred whilst trying to load files for module: {moduleName}",
+                    "Error occurred during loading files", ex);
             }
+
             return successful;
         }
 
@@ -62,9 +66,11 @@ namespace GrowUpAndWork.FileDatabase
             try
             {
                 if (string.IsNullOrWhiteSpace(sf.ID))
-                    throw new Exception($"FileDatabase tried to save an object of type {sf.GetType().FullName} but the ID value was null.");
+                    throw new Exception(
+                        $"FileDatabase tried to save an object of type {sf.GetType().FullName} but the ID value was null.");
                 if (string.IsNullOrWhiteSpace(moduleName))
-                    throw new Exception($"FileDatabase tried to save an object of type {sf.GetType().FullName} with ID {sf.ID} but the module folder name given was null or empty.");
+                    throw new Exception(
+                        $"FileDatabase tried to save an object of type {sf.GetType().FullName} with ID {sf.ID} but the module folder name given was null or empty.");
 
                 //Gets the intended path for the file.
                 string path = GetPathForModule(moduleName, location);
@@ -92,19 +98,23 @@ namespace GrowUpAndWork.FileDatabase
                 if (File.Exists(path))
                     File.Delete(path);
 
-                using (XmlWriter writer = XmlWriter.Create(path, new XmlWriterSettings() { Indent = true, OmitXmlDeclaration = true }))
+                using (XmlWriter writer = XmlWriter.Create(path,
+                    new XmlWriterSettings() {Indent = true, OmitXmlDeclaration = true}))
                 {
                     XmlRootAttribute rootNode = new XmlRootAttribute();
                     rootNode.ElementName = $"{sf.GetType().Assembly.GetName().Name}-{sf.GetType().FullName}";
-                    XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+                    XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces(new[] {XmlQualifiedName.Empty});
                     var serializer = new XmlSerializer(sf.GetType(), rootNode);
                     serializer.Serialize(writer, sf, xmlns);
                 }
+
                 return true;
             }
             catch (Exception ex)
             {
-                ModDebug.ShowError($"Cannot create the file for type {sf.GetType().FullName} with ID {sf.ID} for module {moduleName}:", "Error saving to file", ex);
+                ModDebug.ShowError(
+                    $"Cannot create the file for type {sf.GetType().FullName} with ID {sf.ID} for module {moduleName}:",
+                    "Error saving to file", ex);
                 return false;
             }
         }
@@ -122,7 +132,9 @@ namespace GrowUpAndWork.FileDatabase
             string path = GetPathForModule(moduleName, location);
             if (!Directory.Exists(path))
             {
-                ModDebug.ShowError($"Tried to delete a file with file name {fileName} from directory \"{path}\" but the directory doesn't exist.", "Could not find directory");
+                ModDebug.ShowError(
+                    $"Tried to delete a file with file name {fileName} from directory \"{path}\" but the directory doesn't exist.",
+                    "Could not find directory");
                 successful = false;
             }
 
@@ -139,9 +151,11 @@ namespace GrowUpAndWork.FileDatabase
         private static void Add(ISerialisableFile loadable)
         {
             if (loadable == null)
-                throw new ArgumentNullException("Tried to add something to the FileDatabase Data dictionary that was null");
+                throw new ArgumentNullException(
+                    "Tried to add something to the FileDatabase Data dictionary that was null");
             if (string.IsNullOrWhiteSpace(loadable.ID))
-                throw new ArgumentNullException($"Loadable of type {loadable.GetType().ToString()} has missing ID field");
+                throw new ArgumentNullException(
+                    $"Loadable of type {loadable.GetType().ToString()} has missing ID field");
 
             Type type = loadable.GetType();
             if (!Data.ContainsKey(type))
@@ -149,7 +163,8 @@ namespace GrowUpAndWork.FileDatabase
 
             if (Data[type].ContainsKey(loadable.ID))
             {
-                ModDebug.LogError($"Loader already contains Type: {type.AssemblyQualifiedName} ID: {loadable.ID}, overwriting...");
+                ModDebug.LogError(
+                    $"Loader already contains Type: {type.AssemblyQualifiedName} ID: {loadable.ID}, overwriting...");
                 Data[type][loadable.ID] = loadable;
             }
             else
@@ -180,7 +195,7 @@ namespace GrowUpAndWork.FileDatabase
                     root.ElementName = nodeData;
                     root.IsNullable = true;
                     XmlSerializer serialiser = new XmlSerializer(data.Type, root);
-                    ISerialisableFile loaded = (ISerialisableFile)serialiser.Deserialize(reader);
+                    ISerialisableFile loaded = (ISerialisableFile) serialiser.Deserialize(reader);
                     if (loaded != null)
                         Add(loaded);
                     else
@@ -188,7 +203,7 @@ namespace GrowUpAndWork.FileDatabase
                 }
                 catch (Exception ex)
                 {
-                    if (ex is ArgumentNullException && ((ArgumentNullException)ex).ParamName == "type")
+                    if (ex is ArgumentNullException && ((ArgumentNullException) ex).ParamName == "type")
                         throw new Exception($"Cannot get a type from type name {nodeData} in file {filePath}", ex);
                     throw new Exception($"An error occurred whilst loading file {filePath}", ex);
                 }
@@ -202,6 +217,7 @@ namespace GrowUpAndWork.FileDatabase
         private static void LoadAllFiles(string moduleName)
         {
             #region Loadables Folder
+
             //Check if the given module name is correct
             string modulePath = GetPathForModule(moduleName, Location.Modules);
             if (!Directory.Exists(modulePath))
@@ -241,13 +257,18 @@ namespace GrowUpAndWork.FileDatabase
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"An error occurred while FileDatabase was trying to load all files for module {moduleName}", ex);
+                    throw new Exception(
+                        $"An error occurred while FileDatabase was trying to load all files for module {moduleName}",
+                        ex);
                 }
             }
             else
                 Directory.CreateDirectory(moduleLoadablesPath);
+
             #endregion
+
             #region Documents Folder
+
             string modConfigsPath = GetPathForModule(moduleName, Location.Configs);
             if (Directory.Exists(modConfigsPath))
             {
@@ -262,12 +283,13 @@ namespace GrowUpAndWork.FileDatabase
                         ModDebug.LogError($"Failed to load file: {filePath}\n\n Skipping...", ex);
                     }
                 }
+
                 string[] subfolders = Directory.GetDirectories(modConfigsPath);
                 if (subfolders.Count() > 0)
                 {
-                    foreach(var subFolder in subfolders)
+                    foreach (var subFolder in subfolders)
                     {
-                        foreach(var filePath in Directory.GetFiles(subFolder))
+                        foreach (var filePath in Directory.GetFiles(subFolder))
                         {
                             try
                             {
@@ -283,6 +305,7 @@ namespace GrowUpAndWork.FileDatabase
             }
             else
                 Directory.CreateDirectory(modConfigsPath);
+
             #endregion
         }
 
@@ -305,9 +328,13 @@ namespace GrowUpAndWork.FileDatabase
         public static string GetPathForModule(string moduleName, Location location)
         {
             if (location == Location.Modules)
+            {
                 return Path.Combine(TaleWorlds.Library.BasePath.Name, "Modules", moduleName);
+            }
             else
+            {
                 return Path.Combine(TaleWorlds.Engine.Utilities.GetConfigsPath(), moduleName);
+            }
         }
 
         private class TypeData
@@ -315,11 +342,13 @@ namespace GrowUpAndWork.FileDatabase
             public string AssemblyName { get; private set; } = "";
             public string TypeName { get; private set; } = "";
             public string FullName => $"{TypeName}, {AssemblyName}";
+
             public Type Type
             {
                 get
                 {
-                    return AppDomain.CurrentDomain.GetAssemblies().Where(z => z.FullName.StartsWith(this.AssemblyName)).FirstOrDefault().GetType(TypeName);
+                    return AppDomain.CurrentDomain.GetAssemblies().Where(z => z.FullName.StartsWith(this.AssemblyName))
+                        .FirstOrDefault().GetType(TypeName);
                 }
             }
 
@@ -328,16 +357,19 @@ namespace GrowUpAndWork.FileDatabase
                 if (!string.IsNullOrWhiteSpace(nodeData))
                 {
                     if (!nodeData.Contains("-"))
-                        throw new ArgumentException($"Node data does not contain an assembly string\nNode Data: {nodeData}");
+                        throw new ArgumentException(
+                            $"Node data does not contain an assembly string\nNode Data: {nodeData}");
                     if (!nodeData.Contains("."))
-                        throw new ArgumentException($"Node data does not contain a namespace string\nNode Data: {nodeData}");
+                        throw new ArgumentException(
+                            $"Node data does not contain a namespace string\nNode Data: {nodeData}");
 
                     string[] split = nodeData.Split('-');
 
                     if (!string.IsNullOrWhiteSpace(split[0]))
                         AssemblyName = split[0];
                     else
-                        throw new ArgumentException($"Assembly name in node data was null or empty\nNode Data: {nodeData}");
+                        throw new ArgumentException(
+                            $"Assembly name in node data was null or empty\nNode Data: {nodeData}");
 
                     if (!string.IsNullOrWhiteSpace(split[1]))
                         TypeName = split[1];

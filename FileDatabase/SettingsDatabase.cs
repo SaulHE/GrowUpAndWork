@@ -4,8 +4,9 @@ using System.Linq;
 using ModLib.Debugging;
 using ModLib.GUI.ViewModels;
 using ModLib.Interfaces;
+using ModLib;
 
-namespace GrowUpAndWork.FileDatabase
+namespace ModLib
 {
     public static class SettingsDatabase
     {
@@ -78,7 +79,7 @@ namespace GrowUpAndWork.FileDatabase
         /// <returns>Return true if the settings object was saved successfully. Returns false if it failed to save.</returns>
         public static bool SaveSettings(SettingsBase settingsInstance)
         {
-            return FileDatabase.SaveToFile(settingsInstance.ModuleFolderName, settingsInstance, FileDatabase.Location.Configs);
+            return FileDatabase.SaveToFile(settingsInstance.ModuleFolderName, settingsInstance, FileDatabase.Location.Modules);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
-﻿﻿using System;
- using GrowUpAndWork.FileDatabase;
- using TaleWorlds.Library;
+﻿using System;
+using ModLib;
+using TaleWorlds.Library;
 
 namespace ModLib.GUI.ViewModels
 {
@@ -14,8 +14,8 @@ namespace ModLib.GUI.ViewModels
         public SettingsBase SettingsInstance { get; internal set; }
         public UndoRedoStack URS { get; } = new UndoRedoStack();
 
-        [DataSourceProperty]
-        public string ModName => SettingsInstance.ModName;
+        [DataSourceProperty] public string ModName => SettingsInstance.ModName;
+
         [DataSourceProperty]
         public bool IsSelected
         {
@@ -26,6 +26,7 @@ namespace ModLib.GUI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         [DataSourceProperty]
         public MBBindingList<SettingPropertyGroup> SettingPropertyGroups
         {
@@ -80,6 +81,5 @@ namespace ModLib.GUI.ViewModels
         {
             _executeSelect?.Invoke(this);
         }
-
     }
 }

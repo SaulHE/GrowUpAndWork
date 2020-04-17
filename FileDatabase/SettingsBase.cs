@@ -7,7 +7,7 @@ using ModLib.Attributes;
 using ModLib.GUI.ViewModels;
 using ModLib.Interfaces;
 
-namespace GrowUpAndWork.FileDatabase
+namespace ModLib
 {
     public abstract class SettingsBase : ISerialisableFile, ISubFolder
     {

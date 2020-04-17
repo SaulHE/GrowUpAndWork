@@ -1,8 +1,8 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
- using GrowUpAndWork.FileDatabase;
- using TaleWorlds.Core;
+using ModLib;
+using TaleWorlds.Core;
 using TaleWorlds.Engine;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
@@ -30,14 +30,13 @@ namespace ModLib.GUI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         [DataSourceProperty]
         public bool ChangesMade
         {
-            get
-            {
-                return ModSettingsList.Any((x) => x.URS.ChangesMade());
-            }
+            get { return ModSettingsList.Any((x) => x.URS.ChangesMade()); }
         }
+
         [DataSourceProperty]
         public string DoneButtonText
         {
@@ -48,15 +47,18 @@ namespace ModLib.GUI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         [DataSourceProperty]
         public string CancelButtonText
         {
-            get => _cancelButtonText; set
+            get => _cancelButtonText;
+            set
             {
                 _cancelButtonText = value;
                 OnPropertyChanged();
             }
         }
+
         [DataSourceProperty]
         public MBBindingList<ModSettingsVM> ModSettingsList
         {
@@ -70,6 +72,7 @@ namespace ModLib.GUI.ViewModels
                 }
             }
         }
+
         [DataSourceProperty]
         public ModSettingsVM SelectedMod
         {
@@ -85,10 +88,12 @@ namespace ModLib.GUI.ViewModels
                 }
             }
         }
+
         [DataSourceProperty]
         public string SelectedModName => SelectedMod == null ? "Mod Name Goes Here" : SelectedMod.ModName;
-        [DataSourceProperty]
-        public bool SomethingSelected => SelectedMod != null;
+
+        [DataSourceProperty] public bool SomethingSelected => SelectedMod != null;
+
         [DataSourceProperty]
         public string HintText
         {
@@ -103,8 +108,9 @@ namespace ModLib.GUI.ViewModels
                 }
             }
         }
-        [DataSourceProperty]
-        public bool IsHintVisible => !string.IsNullOrWhiteSpace(HintText);
+
+        [DataSourceProperty] public bool IsHintVisible => !string.IsNullOrWhiteSpace(HintText);
+
         [DataSourceProperty]
         public string SearchText
         {
@@ -144,6 +150,7 @@ namespace ModLib.GUI.ViewModels
                 msvm.RefreshValues();
                 msvm.SetParent(this);
             }
+
             OnPropertyChanged("SelectedMod");
         }
 
@@ -156,6 +163,7 @@ namespace ModLib.GUI.ViewModels
                 msvm.URS.UndoAll();
                 msvm.URS.ClearStack();
             }
+
             AssignParent(true);
             ExecuteSelect(null);
             return true;
@@ -167,16 +175,16 @@ namespace ModLib.GUI.ViewModels
             if (ModSettingsList.Any((x) => x.URS.ChangesMade()))
             {
                 InformationManager.ShowInquiry(new InquiryData("Game Needs to Restart",
-                                "The game needs to be restarted to apply mods settings changes. Do you want to close the game now?",
-                                true, true, "Yes", "No",
-                                () =>
-                                {
-                                    ModSettingsList.Where((x) => x.URS.ChangesMade())
-                                    .Do((x) => SettingsDatabase.SaveSettings(x.SettingsInstance))
-                                    .Do((x) => x.URS.ClearStack());
+                    "The game needs to be restarted to apply mods settings changes. Do you want to close the game now?",
+                    true, true, "Yes", "No",
+                    () =>
+                    {
+                        ModSettingsList.Where((x) => x.URS.ChangesMade())
+                            .Do((x) => SettingsDatabase.SaveSettings(x.SettingsInstance))
+                            .Do((x) => x.URS.ClearStack());
 
-                                    Utilities.QuitGame();
-                                }, () => { }));
+                        Utilities.QuitGame();
+                    }, () => { }));
             }
             else
                 ScreenManager.PopScreen();
@@ -191,11 +199,13 @@ namespace ModLib.GUI.ViewModels
                     true, true, "Yes", "No",
                     () =>
                     {
-                        SelectedMod.URS.Do(new ComplexAction<KeyValuePair<ModSettingsVM, SettingsBase>>(new KeyValuePair<ModSettingsVM, SettingsBase>(SelectedMod, SelectedMod.SettingsInstance),
+                        SelectedMod.URS.Do(new ComplexAction<KeyValuePair<ModSettingsVM, SettingsBase>>(
+                            new KeyValuePair<ModSettingsVM, SettingsBase>(SelectedMod, SelectedMod.SettingsInstance),
                             (KeyValuePair<ModSettingsVM, SettingsBase> kvp) =>
                             {
                                 //Do action
-                                SettingsBase newObj = SettingsDatabase.ResetSettingsInstance(SelectedMod.SettingsInstance);
+                                SettingsBase newObj =
+                                    SettingsDatabase.ResetSettingsInstance(SelectedMod.SettingsInstance);
                                 kvp.Key.SettingsInstance = newObj;
                                 kvp.Key.RefreshValues();
                                 ExecuteSelect(null);
@@ -213,7 +223,6 @@ namespace ModLib.GUI.ViewModels
                                     ExecuteSelect(kvp.Key);
                                 }
                             }));
-
                     }, null));
             }
         }

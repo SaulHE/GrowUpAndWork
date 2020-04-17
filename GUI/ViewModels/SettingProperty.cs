@@ -1,10 +1,10 @@
-﻿﻿using ModLib.Attributes;
+﻿using ModLib.Attributes;
 using ModLib.GUI.GauntletUI;
 using ModLib.Interfaces;
 using System;
 using System.Reflection;
- using GrowUpAndWork.FileDatabase;
- using TaleWorlds.Engine.Screens;
+using ModLib;
+using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 
 namespace ModLib.GUI.ViewModels
@@ -24,6 +24,7 @@ namespace ModLib.GUI.ViewModels
         public SettingType SettingType { get; private set; }
         public ModSettingsScreenVM ScreenVM { get; private set; }
         public string HintText { get; private set; }
+
         public bool SatisfiesSearch
         {
             get
@@ -35,15 +36,18 @@ namespace ModLib.GUI.ViewModels
             }
         }
 
-        [DataSourceProperty]
-        public string Name => SettingAttribute.DisplayName;
+        [DataSourceProperty] public string Name => SettingAttribute.DisplayName;
+
+        [DataSourceProperty] public bool IsIntVisible => SettingType == SettingType.Int;
+        [DataSourceProperty] public bool IsFloatVisible => SettingType == SettingType.Float;
 
         [DataSourceProperty]
-        public bool IsIntVisible => SettingType == SettingType.Int;
-        [DataSourceProperty]
-        public bool IsFloatVisible => SettingType == SettingType.Float;
-        [DataSourceProperty]
-        public bool IsBoolVisible { get => SettingType == SettingType.Bool; set { } }
+        public bool IsBoolVisible
+        {
+            get => SettingType == SettingType.Bool;
+            set { }
+        }
+
         [DataSourceProperty]
         public bool IsEnabled
         {
@@ -54,6 +58,7 @@ namespace ModLib.GUI.ViewModels
                 return Group.GroupToggle;
             }
         }
+
         [DataSourceProperty]
         public bool IsSettingVisible
         {
@@ -75,27 +80,22 @@ namespace ModLib.GUI.ViewModels
         [DataSourceProperty]
         public float FloatValue
         {
-            get
-            {
-                return _floatValue;
-            }
+            get { return _floatValue; }
             set
             {
                 if (SettingType == SettingType.Float && _floatValue != value)
                 {
-                    _floatValue = (float)Math.Round((double)value, 2, MidpointRounding.ToEven);
+                    _floatValue = (float) Math.Round((double) value, 2, MidpointRounding.ToEven);
                     OnPropertyChanged();
                     OnPropertyChanged("ValueString");
                 }
             }
         }
+
         [DataSourceProperty]
         public int IntValue
         {
-            get
-            {
-                return _intValue;
-            }
+            get { return _intValue; }
             set
             {
                 if (SettingType == SettingType.Int)
@@ -106,37 +106,41 @@ namespace ModLib.GUI.ViewModels
                 }
             }
         }
+
         [DataSourceProperty]
         public float FinalisedFloatValue
         {
             get => 0;
             set
             {
-                if ((float)Property.GetValue(SettingsInstance) != value && !initialising)
+                if ((float) Property.GetValue(SettingsInstance) != value && !initialising)
                 {
-                    URS.Do(new SetValueAction<float>(new Ref(Property, SettingsInstance), (float)Math.Round((double)value, 2, MidpointRounding.ToEven)));
+                    URS.Do(new SetValueAction<float>(new Ref(Property, SettingsInstance),
+                        (float) Math.Round((double) value, 2, MidpointRounding.ToEven)));
                 }
             }
         }
+
         [DataSourceProperty]
         public int FinalisedIntValue
         {
             get => 0;
             set
             {
-                if ((int)Property.GetValue(SettingsInstance) != value && !initialising)
+                if ((int) Property.GetValue(SettingsInstance) != value && !initialising)
                 {
                     URS.Do(new SetValueAction<int>(new Ref(Property, SettingsInstance), value));
                 }
             }
         }
+
         [DataSourceProperty]
         public bool BoolValue
         {
             get
             {
                 if (SettingType == SettingType.Bool)
-                    return (bool)Property.GetValue(SettingsInstance);
+                    return (bool) Property.GetValue(SettingsInstance);
                 else
                     return false;
             }
@@ -152,10 +156,10 @@ namespace ModLib.GUI.ViewModels
                 }
             }
         }
-        [DataSourceProperty]
-        public float MaxValue => SettingAttribute.MaxValue;
-        [DataSourceProperty]
-        public float MinValue => SettingAttribute.MinValue;
+
+        [DataSourceProperty] public float MaxValue => SettingAttribute.MaxValue;
+        [DataSourceProperty] public float MinValue => SettingAttribute.MinValue;
+
         [DataSourceProperty]
         public string ValueString
         {
@@ -169,12 +173,12 @@ namespace ModLib.GUI.ViewModels
                     return "";
             }
         }
-        [DataSourceProperty]
-        public Action OnHoverAction => OnHover;
-        [DataSourceProperty]
-        public Action OnHoverEndAction => OnHoverEnd;
 
-        public SettingProperty(SettingPropertyAttribute settingAttribute, SettingPropertyGroupAttribute groupAttribute, PropertyInfo property, ISerialisableFile instance)
+        [DataSourceProperty] public Action OnHoverAction => OnHover;
+        [DataSourceProperty] public Action OnHoverEndAction => OnHoverEnd;
+
+        public SettingProperty(SettingPropertyAttribute settingAttribute, SettingPropertyGroupAttribute groupAttribute,
+            PropertyInfo property, ISerialisableFile instance)
         {
             SettingAttribute = settingAttribute;
             GroupAttribute = groupAttribute;
@@ -194,9 +198,9 @@ namespace ModLib.GUI.ViewModels
                 HintText = $"{Name}: {SettingAttribute.HintText}";
 
             if (SettingType == SettingType.Float)
-                FloatValue = (float)Property.GetValue(SettingsInstance);
+                FloatValue = (float) Property.GetValue(SettingsInstance);
             else if (SettingType == SettingType.Int)
-                IntValue = (int)Property.GetValue(SettingsInstance);
+                IntValue = (int) Property.GetValue(SettingsInstance);
             initialising = false;
         }
 
@@ -209,7 +213,8 @@ namespace ModLib.GUI.ViewModels
             else if (Property.PropertyType == typeof(float))
                 SettingType = SettingType.Float;
             else
-                throw new Exception($"Property {Property.Name} in {SettingsInstance.GetType().FullName} has an invalid type.\nValid types are {string.Join(",", Enum.GetNames(typeof(SettingType)))}");
+                throw new Exception(
+                    $"Property {Property.Name} in {SettingsInstance.GetType().FullName} has an invalid type.\nValid types are {string.Join(",", Enum.GetNames(typeof(SettingType)))}");
         }
 
         public void AssignUndoRedoStack(UndoRedoStack urs)

@@ -1,7 +1,7 @@
 ﻿using ModLib.Attributes;
 using System.Xml.Serialization;
 using GrowUpAndWork;
-using GrowUpAndWork.FileDatabase;
+using ModLib;
 
 namespace ModLib
 {
