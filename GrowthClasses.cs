@@ -25,13 +25,13 @@ namespace GrowUpAndWork.GrowthClasses
 
                 if (targetInheriter.IsFemale == true)
                 {
-                    fatherInheritDivider = 5;
+                    fatherInheritDivider = 7;
                     motherInheritDivider = 3;
                 }
                 else
                 {
                     fatherInheritDivider = 3;
-                    motherInheritDivider = 5;
+                    motherInheritDivider = 7;
                 }
 
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())

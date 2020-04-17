@@ -33,8 +33,6 @@ namespace ModLib.GUI.GauntletUI
                 ScreenManager.TrySetFocus(gauntletLayer);
                 AddLayer(gauntletLayer);
                 vm = new ModSettingsScreenVM();
-                ModDebug.LogError($"vm:  {vm == null}");
-                ModDebug.LogError($"gauntletLayer is {gauntletLayer == null}");
                 movie = gauntletLayer.LoadMovie("ModOptionsScreen", vm);
             }
             catch (Exception e)

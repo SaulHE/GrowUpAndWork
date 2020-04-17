@@ -17,15 +17,8 @@ namespace GrowUpAndWork.Patches
             // ModDebug.ShowError($"One day has passed", "Harmony PostFix text", null);
             if (Hero.MainHero.Children.Count != 0)
             {
-                int cycleCeiling = 0;
-                if (SettingClass.Instance.IsDebugMode == true)
-                {
-                    cycleCeiling = 2;
-                }
-                else
-                {
-                    cycleCeiling = 25;
-                }
+                int cycleCeiling = SettingClass.Instance.ChildrenGrowthCycle;
+                int growthStopAge = SettingClass.Instance.GrowthStopAge;
 
                 if ((int) (Campaign.Current.CampaignStartTime.ElapsedDaysUntilNow % cycleCeiling) == 0)
                 {
@@ -36,7 +29,7 @@ namespace GrowUpAndWork.Patches
                         ModDebug.WriteLog($"Your child's father is {child.Father.Name}");
                         ModDebug.WriteLog($"Your child's mother is {child.Mother.Name}");
 
-                        if (child.Age < 18)
+                        if (child.Age < growthStopAge)
                         {
                             child.BirthDay = HeroHelper.GetRandomBirthDayForAge((int) child.Age + 1);
                             ModDebug.WriteLog($"Now your child: {child.Name} is {child.Age} years old");
@@ -62,8 +55,6 @@ namespace GrowUpAndWork.Patches
                                     new TextObject(
                                         $"Your child inherits from its parents and become capable in many fields"),
                                     0, null, "event:/ui/notification/quest_finished");
-                                Hero.MainHero.BirthDay =
-                                    HeroHelper.GetRandomBirthDayForAge((int) Hero.MainHero.Age + 1);
 
                                 if (child.Mother != null)
                                 {
@@ -122,6 +113,46 @@ namespace GrowUpAndWork.Patches
                                 }
                             */
                             }
+
+                            if (child.Age > 18)
+                            {
+                                if (child.Mother != null)
+                                {
+                                    child.Mother.BirthDay =
+                                        HeroHelper.GetRandomBirthDayForAge((int) child.Mother.Age + 1);
+                                }
+
+                                if (child.Father != null)
+                                {
+                                    child.Father.BirthDay =
+                                        HeroHelper.GetRandomBirthDayForAge((int) child.Father.Age + 1);
+                                }
+
+                                InformationManager.AddQuickInformation(
+                                    new TextObject(
+                                        "You and your spouse are 1 year older due to the growth of your children"), 0,
+                                    null, "event:/ui/notification/quest_update");
+                                ModDebug.WriteLog(
+                                    "You and your spouse are 1 year older due to the growth of your children");
+
+
+                                foreach (Hero sibling in child.Siblings)
+                                {
+                                    if (sibling.Age > child.Age)
+                                    {
+                                        sibling.BirthDay =
+                                            HeroHelper.GetRandomBirthDayForAge((int) sibling.Age + 1);
+                                    }
+                                }
+
+
+                                InformationManager.AddQuickInformation(
+                                    new TextObject(
+                                        $"{child.Name}'s older siblings are 1 year older due to the growth of {child.Name}"),
+                                    0, null, "event:/ui/notification/quest_update");
+                                ModDebug.WriteLog(
+                                    $"${child.Name}'s older siblings are 1 year older due to the growth of {child.Name}");
+                            }
                         }
                     });
                 }
@@ -138,6 +169,4 @@ namespace GrowUpAndWork.Patches
             }
         }
     }
-
-
 }

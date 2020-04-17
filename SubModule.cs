@@ -48,12 +48,14 @@ namespace GrowUpAndWork
 
                 ModDebug.WriteLog("yes");
 
+                
+                // add the screen
+                Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
+                    new TextObject("Mod Options"), 9990,
+                    () => { ScreenManager.PushScreen(new ModOptionsGauntletScreen()); }, false));
+                
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
-                // add the screen
-                // Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
-                //     new TextObject("Mod Options"), 9990,
-                //     () => { ScreenManager.PushScreen(new ModOptionsGauntletScreen()); }, false));
                 
             }
             catch (Exception e)

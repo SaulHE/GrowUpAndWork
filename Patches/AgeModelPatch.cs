@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ModLib;
 
 namespace GrowUpAndWork.Patches
 {
@@ -35,7 +36,7 @@ namespace GrowUpAndWork.Patches
     {
         static void Postfix(ref int __result)
         {
-            __result = 14;
+            __result = SettingClass.Instance.BecomeHeroAge;
         }
     }
     [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.SandBox.GameComponents.DefaultAgeModel), "BecomeOldAge", MethodType.Getter)]
@@ -51,7 +52,7 @@ namespace GrowUpAndWork.Patches
     {
         static void Postfix(ref int __result)
         {
-            __result = 80;
+            __result = SettingClass.Instance.MaxAge;
         }
     }
     
