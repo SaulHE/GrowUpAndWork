@@ -8,6 +8,11 @@ namespace ModLib.Debugging
 {
     public static class ModDebug
     {
+        public static void ShowMessageInBox(string message)
+        {
+            MessageBox.Show($"{message}", "This is a log Info");
+
+        }
         public static void ShowError(string message, string title="", Exception exception = null)
         {
             if (string.IsNullOrWhiteSpace(title))
@@ -16,7 +21,15 @@ namespace ModLib.Debugging
             
             String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
             Log logger = new Log(logFileName);
-            logger.WriteLog($"message: {message}, title:{title}, {exception.ToString()}");
+            logger.WriteLog("Error!!!!!!!!!!!!!!==============>");
+            logger.WriteLog($"message: {message}, title:{title}, {exception}");
+        }
+
+        public static void WriteLog(string message, string title = "")
+        {
+            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+            Log logger = new Log(logFileName);
+            logger.WriteLog($"title:{title}, This is a pure log message: {message} ");
         }
 
         public static void ShowMessage(string message, string title = "", bool nonModal = false)

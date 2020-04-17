@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using GrowUpAndWork.LightLogger;
+using ModLib;
+using ModLib.Debugging;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
@@ -12,73 +14,46 @@ namespace GrowUpAndWork.GrowthClasses
     {
         public static void Inherit(Hero targetInheriter)
         {
-            Log log = new Log(Settings.logFileName);
             try
             {
-                log.WriteLog("enter inherit method");
+                ModDebug.WriteLog("Enter inherit method");
+
                 targetInheriter.ClearSkills();
-                if (targetInheriter.IsFemale)
+                targetInheriter.HeroDeveloper.ClearHeroLevel();
+                int fatherInheritDivider = 0;
+                int motherInheritDivider = 0;
+
+                if (targetInheriter.IsFemale == true)
                 {
-                    foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
-                    {
-                        targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,
-                            targetInheriter.Mother.GetSkillValue(skillIT) / 3 +
-                            targetInheriter.Father.GetSkillValue(skillIT) / 5, false);
-                    }
+                    fatherInheritDivider = 5;
+                    motherInheritDivider = 3;
+                }
+                else
+                {
+                    fatherInheritDivider = 3;
+                    motherInheritDivider = 5;
                 }
 
-                if (targetInheriter.IsFemale == false)
+                foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
-                    foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
-                    {
-                        targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,
-                            targetInheriter.Mother.GetSkillValue(skillIT) / 5 +
-                            targetInheriter.Father.GetSkillValue(skillIT) / 3, false);
-                    }
+                    targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,
+                        targetInheriter.Father.GetSkillValue(skillIT) / fatherInheritDivider +
+                        targetInheriter.Mother.GetSkillValue(skillIT) / motherInheritDivider, false);
                 }
 
                 targetInheriter.Level = 0;
+                
+                targetInheriter.HeroDeveloper.UnspentFocusPoints += 15;
+                targetInheriter.HeroDeveloper.UnspentAttributePoints += 20;
+                
             }
             catch (Exception e)
             {
-                log.WriteLog($"{e.ToString()}");
-                throw e;
+                ModDebug.ShowError($"Error during inheritance", "Error During Inheritance", e);
             }
         }
     }
 
-    public class NormalAgeModel : DefaultAgeModel
-    {
-        public override int BecomeInfantAge
-        {
-            get { return 1; }
-        }
-
-        public override int BecomeChildAge
-        {
-            get { return 6; }
-        }
-
-        public override int BecomeTeenagerAge
-        {
-            get { return 10; }
-        }
-
-        public override int HeroComesOfAge
-        {
-            get { return Settings.BecomeHeroAge; }
-        }
-
-        public override int BecomeOldAge
-        {
-            get { return 50; }
-        }
-
-        public override int MaxAge
-        {
-            get { return 75; }
-        }
-    }
 
     public class GrowthData
     {

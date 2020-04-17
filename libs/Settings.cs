@@ -7,7 +7,7 @@ namespace ModLib
 {
     public class Settings : SettingsBase
     {
-        public override string ModName => "ModLib";
+        public override string ModName => "GrowUpAndWork";
         public override string ModuleFolderName => SubModule.ModuleFolderName;
         public const string SettingsInstanceID = "ModLibSettings";
         public static Settings Instance
