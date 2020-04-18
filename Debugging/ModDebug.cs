@@ -6,7 +6,7 @@ using Serilog;
 using TaleWorlds.Library;
 using Logger = Serilog.Core.Logger;
 
-namespace ModLib.Debugging
+namespace GrowUpAndWorkLib.Debugging
 {
     public static class ModDebug
     {

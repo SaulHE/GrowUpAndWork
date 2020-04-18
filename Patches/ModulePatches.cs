@@ -2,7 +2,7 @@
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
 using Helpers;
-using ModLib.Debugging;
+using GrowUpAndWorkLib.Debugging;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;

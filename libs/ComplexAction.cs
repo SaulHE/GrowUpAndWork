@@ -1,7 +1,7 @@
-﻿using ModLib.Interfaces;
-using System;
+﻿using System;
+using GrowUpAndWorkLib.Interfaces;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public class ComplexAction<T> : IAction
     {

@@ -4,7 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Core;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public static class SmeltingHelper
     {

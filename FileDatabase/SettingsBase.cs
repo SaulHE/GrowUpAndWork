@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ModLib;
-using ModLib.Attributes;
-using ModLib.GUI.ViewModels;
-using ModLib.Interfaces;
+using GrowUpAndWorkLib.Attributes;
+using GrowUpAndWorkLib.GUI.ViewModels;
+using GrowUpAndWorkLib.Interfaces;
+using GrowUpAndWorkLib;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public abstract class SettingsBase : ISerialisableFile, ISubFolder
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public class Ref
     {

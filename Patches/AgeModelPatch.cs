@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using ModLib;
+using GrowUpAndWorkLib;
 
 namespace GrowUpAndWork.Patches
 {

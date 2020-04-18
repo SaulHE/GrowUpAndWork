@@ -8,8 +8,8 @@ using GrowUpAndWork.Behaviour;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
 using Helpers;
-using ModLib;
-using ModLib.Debugging;
+using GrowUpAndWorkLib;
+using GrowUpAndWorkLib.Debugging;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
@@ -19,7 +19,7 @@ using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 using TaleWorlds.SaveSystem;
 using Module = TaleWorlds.MountAndBlade.Module;
-using ModLib.GUI.GauntletUI;
+using GrowUpAndWorkLib.GUI.GauntletUI;
 
 namespace GrowUpAndWork
 {

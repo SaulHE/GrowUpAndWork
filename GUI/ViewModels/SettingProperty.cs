@@ -1,13 +1,13 @@
-﻿using ModLib.Attributes;
-using ModLib.GUI.GauntletUI;
-using ModLib.Interfaces;
-using System;
+﻿using System;
 using System.Reflection;
-using ModLib;
+using GrowUpAndWorkLib.Attributes;
+using GrowUpAndWorkLib.GUI.GauntletUI;
+using GrowUpAndWorkLib.Interfaces;
+using GrowUpAndWorkLib;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.ViewModels
+namespace GrowUpAndWorkLib.GUI.ViewModels
 {
     public class SettingProperty : ViewModel
     {

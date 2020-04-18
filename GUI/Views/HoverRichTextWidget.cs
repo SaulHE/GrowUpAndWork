@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TaleWorlds.GauntletUI;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.Views
+namespace GrowUpAndWorkLib.GUI.Views
 {
     public class HoverRichTextWidget : RichTextWidget
     {

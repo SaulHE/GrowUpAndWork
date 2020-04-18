@@ -1,7 +1,7 @@
 ﻿﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public static class StackExtension
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TaleWorlds.SaveSystem;
 using GrowUpAndWork.GrowthClasses;
-using ModLib.Debugging;
+using GrowUpAndWorkLib.Debugging;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 

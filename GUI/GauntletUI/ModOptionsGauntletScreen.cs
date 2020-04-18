@@ -1,6 +1,6 @@
 ﻿using System;
-using ModLib.Debugging;
-using ModLib.GUI.ViewModels;
+using GrowUpAndWorkLib.Debugging;
+using GrowUpAndWorkLib.GUI.ViewModels;
 using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.GauntletUI.Data;
@@ -8,7 +8,7 @@ using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 using TaleWorlds.TwoDimension;
 
-namespace ModLib.GUI.GauntletUI
+namespace GrowUpAndWorkLib.GUI.GauntletUI
 {
     internal class ModOptionsGauntletScreen : ScreenBase
     {

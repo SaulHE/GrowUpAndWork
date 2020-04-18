@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
-using ModLib.Debugging;
-using ModLib.Interfaces;
+using GrowUpAndWorkLib.Debugging;
+using GrowUpAndWorkLib.Interfaces;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public static class FileDatabase
     {

@@ -1,6 +1,6 @@
-﻿using ModLib.Interfaces;
+﻿using GrowUpAndWorkLib.Interfaces;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public class SetValueAction<T> : IAction where T : struct
     {

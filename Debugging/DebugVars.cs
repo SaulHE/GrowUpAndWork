@@ -1,4 +1,4 @@
-﻿﻿namespace ModLib.Debugging
+﻿﻿namespace GrowUpAndWorkLib.Debugging
 {
     public static class DebugVars
     {

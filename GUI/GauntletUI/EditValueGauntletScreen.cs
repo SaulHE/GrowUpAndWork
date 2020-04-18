@@ -1,16 +1,16 @@
-﻿﻿using ModLib.GUI.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaleWorlds.Engine.GauntletUI;
+ using GrowUpAndWorkLib.GUI.ViewModels;
+ using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.GauntletUI.Data;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.GauntletUI
+namespace GrowUpAndWorkLib.GUI.GauntletUI
 {
     public class EditValueGauntletScreen : ScreenBase
     {

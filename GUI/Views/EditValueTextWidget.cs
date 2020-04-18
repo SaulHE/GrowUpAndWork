@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModLib;
+using GrowUpAndWorkLib;
 using TaleWorlds.GauntletUI;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.Views
+namespace GrowUpAndWorkLib.GUI.Views
 {
     public class EditValueTextWidget : EditableTextWidget
     {

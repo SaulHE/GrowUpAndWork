@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ModLib.Debugging;
-using ModLib.GUI.ViewModels;
-using ModLib.Interfaces;
-using ModLib;
+using GrowUpAndWorkLib.Debugging;
+using GrowUpAndWorkLib.GUI.ViewModels;
+using GrowUpAndWorkLib.Interfaces;
+using GrowUpAndWorkLib;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public static class SettingsDatabase
     {

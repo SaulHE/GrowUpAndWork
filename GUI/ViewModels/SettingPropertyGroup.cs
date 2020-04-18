@@ -1,9 +1,9 @@
-﻿﻿using ModLib.Attributes;
-using System;
+﻿using System;
 using TaleWorlds.Library;
 using System.Linq;
+ using GrowUpAndWorkLib.Attributes;
 
-namespace ModLib.GUI.ViewModels
+ namespace GrowUpAndWorkLib.GUI.ViewModels
 {
     public class SettingPropertyGroup : ViewModel
     {

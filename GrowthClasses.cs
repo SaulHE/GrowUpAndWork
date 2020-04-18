@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using ModLib;
-using ModLib.Debugging;
+using GrowUpAndWorkLib;
+using GrowUpAndWorkLib.Debugging;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;

@@ -1,7 +1,7 @@
 ﻿﻿using System.Collections.Generic;
 using TaleWorlds.Library;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public static class MBBindingListExtensions
     {

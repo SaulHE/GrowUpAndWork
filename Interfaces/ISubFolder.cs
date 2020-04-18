@@ -1,4 +1,4 @@
-﻿﻿namespace ModLib.Interfaces
+﻿﻿namespace GrowUpAndWorkLib.Interfaces
 {
     interface ISubFolder
     {

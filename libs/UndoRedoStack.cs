@@ -1,7 +1,7 @@
-﻿using ModLib.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GrowUpAndWorkLib.Interfaces;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public class UndoRedoStack
     {

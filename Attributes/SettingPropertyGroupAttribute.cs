@@ -1,7 +1,7 @@
-﻿﻿using ModLib.GUI.ViewModels;
-using System;
+﻿using System;
+ using GrowUpAndWorkLib.GUI.ViewModels;
 
-namespace ModLib.Attributes
+ namespace GrowUpAndWorkLib.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class SettingPropertyGroupAttribute : Attribute

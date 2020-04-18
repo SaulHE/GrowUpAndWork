@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ModLib;
+using GrowUpAndWorkLib;
 using TaleWorlds.Core;
 using TaleWorlds.Engine;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace ModLib.GUI.ViewModels
+namespace GrowUpAndWorkLib.GUI.ViewModels
 {
     public class ModSettingsScreenVM : ViewModel
     {

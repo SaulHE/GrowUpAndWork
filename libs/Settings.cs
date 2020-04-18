@@ -1,9 +1,9 @@
-﻿using ModLib.Attributes;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using GrowUpAndWork;
-using ModLib;
+using GrowUpAndWorkLib.Attributes;
+using GrowUpAndWorkLib;
 
-namespace ModLib
+namespace GrowUpAndWorkLib
 {
     public class Settings : SettingsBase
     {

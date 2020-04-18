@@ -1,4 +1,4 @@
-﻿﻿namespace ModLib
+﻿﻿namespace GrowUpAndWorkLib
 {
     public static class StringExtensions
     {

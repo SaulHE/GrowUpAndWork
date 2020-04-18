@@ -1,8 +1,8 @@
-﻿﻿using ModLib.GUI.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+ using GrowUpAndWorkLib.GUI.ViewModels;
 
-namespace ModLib
+ namespace GrowUpAndWorkLib
 {
     public static class ICollectionExtensions
     {

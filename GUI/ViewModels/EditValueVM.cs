@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ModLib;
+using GrowUpAndWorkLib;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.ViewModels
+namespace GrowUpAndWorkLib.GUI.ViewModels
 {
     public class EditValueVM : ViewModel
     {

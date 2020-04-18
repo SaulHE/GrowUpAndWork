@@ -1,8 +1,8 @@
 ﻿using System;
-using ModLib;
+using GrowUpAndWorkLib;
 using TaleWorlds.Library;
 
-namespace ModLib.GUI.ViewModels
+namespace GrowUpAndWorkLib.GUI.ViewModels
 {
     public class ModSettingsVM : ViewModel
     {
