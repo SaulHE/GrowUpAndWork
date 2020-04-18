@@ -96,6 +96,8 @@ namespace ModLib
             return newObj;
         }
 
+        //TODO this is where it builds a Setting,
+        // And it is working now.
         internal static void BuildModSettingsVMs()
         {
             try
@@ -104,6 +106,8 @@ namespace ModLib
                 foreach (var settings in AllSettings)
                 {
                     ModSettingsVM msvm = new ModSettingsVM(settings);
+                    // _modSettingsVMs is very important
+                    
                     _modSettingsVMs.Add(msvm);
                 }
                 _modSettingsVMs.Sort((x, y) => y.ModName.CompareTo(x.ModName));

@@ -33,7 +33,9 @@ namespace ModLib.GUI.GauntletUI
                 ScreenManager.TrySetFocus(gauntletLayer);
                 AddLayer(gauntletLayer);
                 vm = new ModSettingsScreenVM();
-                movie = gauntletLayer.LoadMovie("ModOptionsScreen", vm);
+                
+                
+                movie = gauntletLayer.LoadMovie("GrowUpAndWorkOptionsScreen", vm);
             }
             catch (Exception e)
             {

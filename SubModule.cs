@@ -48,7 +48,7 @@ namespace GrowUpAndWork
 
                 // add the screen
                 Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
-                    new TextObject("Mod Options"), 9990,
+                    new TextObject("GrowUpAndWorkOptionScreen"), 9990,
                     () => { ScreenManager.PushScreen(new ModOptionsGauntletScreen()); }, false));
                 
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");

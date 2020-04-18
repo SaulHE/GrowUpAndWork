@@ -1,8 +1,8 @@
 ﻿﻿using TaleWorlds.GauntletUI;
 
-namespace ModLib.GUI.Views
+namespace GrowUpAndWorkLib.GUI.Views
 {
-    public class ModLibSliderWidget : SliderWidget
+    public class GrowUpAndWorkLibSliderWidget : SliderWidget
     {
         //private float oldFloatValue;
         //private int oldIntValue;
@@ -34,7 +34,7 @@ namespace ModLib.GUI.Views
             }
         }
 
-        public ModLibSliderWidget(UIContext context) : base(context)
+        public GrowUpAndWorkLibSliderWidget(UIContext context) : base(context)
         {
         }
 

@@ -90,7 +90,7 @@ namespace ModLib.GUI.ViewModels
         }
 
         [DataSourceProperty]
-        public string SelectedModName => SelectedMod == null ? "Mod Name Goes Here" : SelectedMod.ModName;
+        public string SelectedModName => SelectedMod == null ? "GrowUpAndWork" : SelectedMod.ModName;
 
         [DataSourceProperty] public bool SomethingSelected => SelectedMod != null;
 
@@ -138,7 +138,7 @@ namespace ModLib.GUI.ViewModels
         public override void RefreshValues()
         {
             base.RefreshValues();
-            TitleLabel = "Mod Options";
+            TitleLabel = "GrowUpAndWorkOptions";
             DoneButtonText = new TextObject("{=WiNRdfsm}Done", null).ToString();
             CancelButtonText = new TextObject("{=3CpNUnVl}Cancel", null).ToString();
 
