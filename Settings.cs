@@ -34,7 +34,7 @@ namespace GrowUpAndWork
         
         
         [XmlElement]
-        [SettingProperty("Becoming Hero Age", 6, 18, "The age at which a child becomes a playable hero. Recommend setting to a value greater than 14, otherwise sometimes NPCs will spawn as children")]
+        [SettingProperty("Children Becoming Hero Age", 6, 18, "The age at which a child becomes a playable hero. Recommend setting to a value greater than 14, otherwise sometimes NPCs will spawn as children")]
         [SettingPropertyGroup("Aging System Tweak")]
         public int BecomeHeroAge { get; set; } = 14;
 
@@ -45,7 +45,7 @@ namespace GrowUpAndWork
         public int MaxAge { get; set; } = 80;
 
         [XmlElement] 
-        [SettingProperty("Children Aging Cycle in Days", 2, 84, "How many days your children need to grow one year older. In Native 1 year is 84 days")]
+        [SettingProperty("How many days it takes your child to age 1-year older", 2, 84, "How many days your children need to grow one year older. In Native 1 year is 84 days")]
         [SettingPropertyGroup("Aging System Tweak")]
         public int ChildrenGrowthCycle { get; set; } = 25;
 
