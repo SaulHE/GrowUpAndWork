@@ -16,7 +16,7 @@ namespace GrowUpAndWork.Patches
         {
             if (__exception != null)
             {
-                ModDebug.ShowError(
+                GrowthDebug.ShowError(
                     $"Bannerlord has encounter an error and needs to close. See the error information below.",
                     "Mount and Blade Bannerlord has crashed", __exception);
             }

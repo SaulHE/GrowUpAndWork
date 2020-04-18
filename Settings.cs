@@ -1,6 +1,7 @@
 ﻿using System.Xml.Serialization;
 using GrowUpAndWorkLib;
-using GrowUpAndWorkLib.Attributes;
+using ModLib;
+using ModLib.Attributes;
 using TaleWorlds.Library;
 
 namespace GrowUpAndWork

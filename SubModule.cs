@@ -10,6 +10,8 @@ using HarmonyLib;
 using Helpers;
 using GrowUpAndWorkLib;
 using GrowUpAndWorkLib.Debugging;
+using ModLib;
+using ModLib.Debugging;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
@@ -19,7 +21,6 @@ using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
 using TaleWorlds.SaveSystem;
 using Module = TaleWorlds.MountAndBlade.Module;
-using GrowUpAndWorkLib.GUI.GauntletUI;
 
 namespace GrowUpAndWork
 {
@@ -29,37 +30,27 @@ namespace GrowUpAndWork
 
         protected override void OnSubModuleLoad()
         {
-            /*
-            Module.CurrentModule.AddInitialStateOption(new InitialStateOption("TestMainMenuOption", new TextObject("Click Me!", null), 9990,
-                () =>
-                {
-                    InformationManager.DisplayMessage(new InformationMessage("Hello World!"));
-                }, false));
-            */
+            base.OnSubModuleLoad();
             try
             {
-                FileDatabase.Initialise("GrowUpAndWork");
-                SettingClass SettingInstance = FileDatabase.Get<SettingClass>(SettingClass.InstanceID);
-                if (SettingInstance == null) SettingInstance = new SettingClass();
-                SettingsDatabase.RegisterSettings(SettingInstance);
-
-                SettingsDatabase.SaveSettings(SettingInstance);
+                FileDatabase.Initialise(ModuleFolderName);
                 
-
-                // add the screen
-                Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
-                    new TextObject("GrowUpAndWorkOptionScreen"), 9990,
-                    () => { ScreenManager.PushScreen(new ModOptionsGauntletScreen()); }, false));
+                SettingClass SettingInstance = FileDatabase.Get<SettingClass>(SettingClass.InstanceID);
+                
+                if (SettingInstance == null) SettingInstance = new SettingClass();
+                
+                SettingsDatabase.RegisterSettings(SettingInstance);
+                SettingsDatabase.SaveSettings(SettingInstance);
                 
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
                 
-                ModDebug.LogInfo("Mod Loaded");
+                GrowthDebug.LogInfo("Mod Loaded");
                 
             }
             catch (Exception e)
             {
-                ModDebug.ShowError($"An error occured whilst initializing the GrowUpAndWork",
+                GrowthDebug.ShowError($"An error occured whilst initializing the GrowUpAndWork",
                     "Error during initialization", e);
             }
         }
@@ -75,15 +66,14 @@ namespace GrowUpAndWork
             {
                 base.OnGameStart(game, gameStarterObject);
 
-
                 if (!(game.GameType is Campaign))
                     return;
                 CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
-                ModDebug.LogInfo("Campaign Game Started");
+                GrowthDebug.LogInfo("Campaign Game Started");
             }
             catch (Exception e)
             {
-                ModDebug.ShowError($"An error occured whilst game starting initializing the GrowUpAndWork",
+                GrowthDebug.ShowError($"An error occured whilst game starting initializing the GrowUpAndWork",
                     "Game Starting GrowUpAndWork Error", e);
             }
         }

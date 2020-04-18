@@ -27,8 +27,8 @@ namespace GrowUpAndWork.Behaviour
 
         public void PrintData()
         {
-            ModDebug.LogInfo($"The cycleCount is {this._growthData.CycleCount}");
-            ModDebug.LogInfo($"The beenRunBefore boolean is {this._growthData.BeenRunBefore}");
+            GrowthDebug.LogInfo($"The cycleCount is {this._growthData.CycleCount}");
+            GrowthDebug.LogInfo($"The beenRunBefore boolean is {this._growthData.BeenRunBefore}");
         }
 
         public int IncreaseCount()

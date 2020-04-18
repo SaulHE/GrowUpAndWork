@@ -15,7 +15,7 @@ namespace GrowUpAndWork.GrowthClasses
         {
             try
             {
-                ModDebug.LogInfo("Enter inherit method");
+                GrowthDebug.LogInfo("Enter inherit method");
 
                 targetInheriter.ClearSkills();
                 targetInheriter.HeroDeveloper.ClearHeroLevel();
@@ -48,7 +48,7 @@ namespace GrowUpAndWork.GrowthClasses
             }
             catch (Exception e)
             {
-                ModDebug.ShowError($"Error during inheritance", "Error During Inheritance", e);
+                GrowthDebug.ShowError($"Error during inheritance", "Error During Inheritance", e);
             }
         }
     }
