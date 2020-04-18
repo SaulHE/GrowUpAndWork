@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using GrowUpAndWork.LightLogger;
 using GrowUpAndWork.Behaviour;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
@@ -45,6 +44,7 @@ namespace GrowUpAndWork
                 SettingsDatabase.RegisterSettings(SettingInstance);
 
                 SettingsDatabase.SaveSettings(SettingInstance);
+                
 
                 // add the screen
                 Module.CurrentModule.AddInitialStateOption(new InitialStateOption("ModOptionsMenu",
@@ -53,7 +53,8 @@ namespace GrowUpAndWork
                 
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
-                ModDebug.WriteLog("Mod Loaded");
+                
+                ModDebug.LogInfo("Mod Loaded");
                 
             }
             catch (Exception e)
@@ -78,7 +79,7 @@ namespace GrowUpAndWork
                 if (!(game.GameType is Campaign))
                     return;
                 CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
-                ModDebug.WriteLog("Campaign Game Started");
+                ModDebug.LogInfo("Campaign Game Started");
             }
             catch (Exception e)
             {

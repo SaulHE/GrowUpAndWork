@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TaleWorlds.SaveSystem;
 using GrowUpAndWork.GrowthClasses;
-using GrowUpAndWork.LightLogger;
+using ModLib.Debugging;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 
@@ -27,19 +27,14 @@ namespace GrowUpAndWork.Behaviour
 
         public void PrintData()
         {
-            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
-            Log logger = new Log(logFileName);
-            logger.WriteLog($"The cycleCount is {this._growthData.CycleCount}");
-            logger.WriteLog($"The beenRunBefore boolean is {this._growthData.BeenRunBefore}");
+            ModDebug.LogInfo($"The cycleCount is {this._growthData.CycleCount}");
+            ModDebug.LogInfo($"The beenRunBefore boolean is {this._growthData.BeenRunBefore}");
         }
 
         public int IncreaseCount()
         {
             String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
-            Log log = new Log(logFileName);
             int res = this._growthData.increaseCycleCount(); 
-            log.WriteLog($"The beenRunBefore has been set to {this._growthData.SetBeenRunBefore()}"); 
-            log.WriteLog($"The CycleCount value now is {res}");
             return res;
 
         }
@@ -54,9 +49,7 @@ namespace GrowUpAndWork.Behaviour
         private void OnSessionLaunched(CampaignGameStarter cgs)
         {
             String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
-            Log log = new Log(logFileName);
 
-            log.WriteLog($"The Run before is {this._growthData.BeenRunBefore}");
             this._growthData.BeenRunBefore = true;
         }
 

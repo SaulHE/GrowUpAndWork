@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using GrowUpAndWork.LightLogger;
 using ModLib;
 using ModLib.Debugging;
 using TaleWorlds.CampaignSystem;
@@ -16,7 +15,7 @@ namespace GrowUpAndWork.GrowthClasses
         {
             try
             {
-                ModDebug.WriteLog("Enter inherit method");
+                ModDebug.LogInfo("Enter inherit method");
 
                 targetInheriter.ClearSkills();
                 targetInheriter.HeroDeveloper.ClearHeroLevel();

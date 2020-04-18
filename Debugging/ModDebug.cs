@@ -1,36 +1,46 @@
-﻿﻿using System;
+﻿using System;
 using System.Threading;
 using System.Windows.Forms;
- using GrowUpAndWork;
- using GrowUpAndWork.LightLogger;
+using GrowUpAndWork;
+using Serilog;
 using TaleWorlds.Library;
+using Logger = Serilog.Core.Logger;
 
 namespace ModLib.Debugging
 {
     public static class ModDebug
     {
+        private static Logger log  = new LoggerConfiguration().WriteTo.File(SettingClass.LogFileName,
+                rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes:90000000).CreateLogger();
         public static void ShowMessageInBox(string message)
         {
             MessageBox.Show($"{message}", "This is a log Info");
-
         }
-        public static void ShowError(string message, string title="", Exception exception = null)
+
+        public static void ShowError(string message, string title = "", Exception exception = null)
         {
             if (string.IsNullOrWhiteSpace(title))
                 title = "";
             MessageBox.Show($"{message}\n\n{exception?.ToStringFull()}", title);
 
-            String logFileName = SettingClass.Instance.LogFileName;
-            Log logger = new Log(logFileName);
-            logger.WriteLog("Error!!!!!!!!!!!!!!==============>");
-            logger.WriteLog($"message: {message}, title:{title}, {exception}");
+            LogError(message, title, exception);
         }
 
-        public static void WriteLog(string message, string title = "")
+        public static void LogInfo(string message, string title = "")
         {
-            String logFileName = SettingClass.Instance.LogFileName;
-            Log logger = new Log(logFileName);
-            logger.WriteLog($"title:{title}, This is a pure log message: {message} ");
+
+            log.Information("-------------------------------------------");
+            log.Information($"title: {title}, This is a pure log message");
+            log.Information($"{DateTime.Now.ToString()} : {message}");
+            log.Information("-------------------------------------------");
+        }
+
+        public static void LogError(string message, string title = "", Exception exception = null)
+        {
+            log.Information("-------------------------------------------");
+            log.Information($"!!!This is An Error {DateTime.Now.ToString()} : {title},");
+            log.Error(message, exception);
+            log.Information("-------------------------------------------");
         }
 
         public static void ShowMessage(string message, string title = "", bool nonModal = false)
@@ -39,16 +49,11 @@ namespace ModLib.Debugging
             {
                 new Thread(() => MessageBox.Show(message, title)).Start();
             }
+
             MessageBox.Show(message, title);
-            
-            String logFileName = SettingClass.Instance.LogFileName;
-            Log logger = new Log(logFileName);
-            logger.WriteLog($"{title}, message is: {message}");
-        }
 
-        public static void LogError(string error, Exception ex = null)
-        {
-
+            String logFileName = SettingClass.LogFileName;
+            LogInfo(message, title);
         }
     }
 }

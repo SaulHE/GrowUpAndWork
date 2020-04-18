@@ -249,7 +249,7 @@ namespace ModLib
                                 }
                                 catch (Exception ex)
                                 {
-                                    ModDebug.LogError($"Failed to load file: {filePath} \n\nSkipping..\n\n", ex);
+                                    ModDebug.LogError($"Failed to load file: {filePath} \n\nSkipping..\n\n", "Error Happens in FileDatabase.cs",ex);
                                 }
                             }
                         }
@@ -280,7 +280,7 @@ namespace ModLib
                     }
                     catch (Exception ex)
                     {
-                        ModDebug.LogError($"Failed to load file: {filePath}\n\n Skipping...", ex);
+                        ModDebug.LogError($"Failed to load file: {filePath}\n\n Skipping...", "Error Happens in FileDatabase.cs",ex);
                     }
                 }
 
@@ -297,7 +297,7 @@ namespace ModLib
                             }
                             catch (Exception ex)
                             {
-                                ModDebug.LogError($"Failed to load file: {filePath}\n\n Skipping...", ex);
+                                ModDebug.LogError($"Failed to load file: {filePath}\n\n Skipping...", "Error Happens in File Database",ex);
                             }
                         }
                     }

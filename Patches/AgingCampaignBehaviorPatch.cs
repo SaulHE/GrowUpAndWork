@@ -24,28 +24,28 @@ namespace GrowUpAndWork.Patches
                 {
                     Hero.MainHero.Children.ForEach((Hero child) =>
                     {
-                        ModDebug.WriteLog($"Handling Your child {child.Name}");
-                        ModDebug.WriteLog($"Your child is {child.Age} years old before");
-                        ModDebug.WriteLog($"Your child's father is {child.Father.Name}");
-                        ModDebug.WriteLog($"Your child's mother is {child.Mother.Name}");
+                        ModDebug.LogInfo($"Handling Your child {child.Name}");
+                        ModDebug.LogInfo($"Your child is {child.Age} years old before");
+                        ModDebug.LogInfo($"Your child's father is {child.Father.Name}");
+                        ModDebug.LogInfo($"Your child's mother is {child.Mother.Name}");
 
                         if (child.Age < growthStopAge)
                         {
                             child.BirthDay = HeroHelper.GetRandomBirthDayForAge((int) child.Age + 1);
-                            ModDebug.WriteLog($"Now your child: {child.Name} is {child.Age} years old");
+                            ModDebug.LogInfo($"Now your child: {child.Name} is {child.Age} years old");
                             InformationManager.AddQuickInformation(
                                 new TextObject($"Now your child: {child.Name} is {(int) child.Age} years old"), 0,
                                 null, "event:/ui/notification/quest_update");
                             if ((int) child.Age == Campaign.Current.Models.AgeModel.HeroComesOfAge)
                             {
-                                ModDebug.WriteLog($"Before inheritance");
-                                ModDebug.WriteLog($"{child.Name}'s skill is level, now is {child.Level}");
+                                ModDebug.LogInfo($"Before inheritance");
+                                ModDebug.LogInfo($"{child.Name}'s skill is level, now is {child.Level}");
 
                                 InheritHelper.Inherit(child);
 
-                                ModDebug.WriteLog($"after inheritance");
+                                ModDebug.LogInfo($"after inheritance");
 
-                                ModDebug.WriteLog(
+                                ModDebug.LogInfo(
                                     $"Your child {child.Name} has now become a hero and is ready to fight for his clan!");
                                 InformationManager.AddQuickInformation(
                                     new TextObject(
@@ -72,7 +72,7 @@ namespace GrowUpAndWork.Patches
                                     new TextObject(
                                         "You and your spouse are 1 year older due to the growth of your children"), 0,
                                     null, "event:/ui/notification/quest_update");
-                                ModDebug.WriteLog(
+                                ModDebug.LogInfo(
                                     "You and your spouse are 1 year older due to the growth of your children");
 
 
@@ -90,7 +90,7 @@ namespace GrowUpAndWork.Patches
                                     new TextObject(
                                         $"{child.Name}'s older siblings are 1 year older due to the growth of {child.Name}"),
                                     0, null, "event:/ui/notification/quest_update");
-                                ModDebug.WriteLog(
+                                ModDebug.LogInfo(
                                     $"${child.Name}'s older siblings are 1 year older due to the growth of {child.Name}");
                                 /*
                                 ModDebug.WriteLog("starting add the negative skillXpProgress back");
@@ -132,7 +132,7 @@ namespace GrowUpAndWork.Patches
                                     new TextObject(
                                         "You and your spouse are 1 year older due to the growth of your children"), 0,
                                     null, "event:/ui/notification/quest_update");
-                                ModDebug.WriteLog(
+                                ModDebug.LogInfo(
                                     "You and your spouse are 1 year older due to the growth of your children");
 
 
@@ -150,7 +150,7 @@ namespace GrowUpAndWork.Patches
                                     new TextObject(
                                         $"{child.Name}'s older siblings are 1 year older due to the growth of {child.Name}"),
                                     0, null, "event:/ui/notification/quest_update");
-                                ModDebug.WriteLog(
+                                ModDebug.LogInfo(
                                     $"${child.Name}'s older siblings are 1 year older due to the growth of {child.Name}");
                             }
                         }

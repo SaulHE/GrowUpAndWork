@@ -29,8 +29,7 @@ namespace GrowUpAndWork
         public bool IsDebugMode { get; set; } = true;
 
         
-        [XmlElement]
-        public string LogFileName { get; set; } = BasePath.Name + "Modules/GrowUpAndWork" + "/" + "log.txt";
+        public static string LogFileName { get; set; } = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
         
         
         [XmlElement]
