@@ -46,6 +46,7 @@ namespace GrowUpAndWork
                 harmony.PatchAll();
                 
                 GrowthDebug.LogInfo("Mod Loaded");
+                GrowthDebug.LogInfo($"Current Language: {BannerlordConfig.Language}");
                 
             }
             catch (Exception e)

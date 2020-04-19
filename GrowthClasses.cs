@@ -26,13 +26,13 @@ namespace GrowUpAndWork.GrowthClasses
 
                 if (targetInheriter.IsFemale == true)
                 {
-                    fatherInheritDivider = 7;
-                    motherInheritDivider = 3;
+                    fatherInheritDivider = 10;
+                    motherInheritDivider = 5;
                 }
                 else
                 {
-                    fatherInheritDivider = 3;
-                    motherInheritDivider = 7;
+                    fatherInheritDivider = 5;
+                    motherInheritDivider = 10;
                 }
 
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
@@ -44,8 +44,8 @@ namespace GrowUpAndWork.GrowthClasses
 
                 targetInheriter.Level = 0;
                 
-                targetInheriter.HeroDeveloper.UnspentFocusPoints += 15;
-                targetInheriter.HeroDeveloper.UnspentAttributePoints += 20;
+                targetInheriter.HeroDeveloper.UnspentFocusPoints += 10;
+                targetInheriter.HeroDeveloper.UnspentAttributePoints += 10;
                 
             }
             catch (Exception e)

@@ -30,18 +30,17 @@ namespace GrowUpAndWorkLib.Debugging
         public static void LogInfo(string message, string title = "")
         {
 
-            log.Information("-------------------------------------------");
-            log.Information($"title: {title}, This is a pure log message");
+            log.Information("------------");
+            log.Information($"title: {title}, Pure Log");
             log.Information($"{message}");
-            log.Information("-------------------------------------------");
         }
 
         public static void LogError(string message, string title = "", Exception exception = null)
         {
-            log.Information("-------------------------------------------");
+            log.Information("============================================>");
             log.Information($"!!!This is An Error, Happens in {DateTime.Now.ToString()} : {title},");
             log.Error($"{message} The detailed information is {exception.ToStringFull()}", exception);
-            log.Information("-------------------------------------------");
+            log.Information("<==============================================");
         }
 
         public static void ShowMessage(string message, string title = "", bool nonModal = false)
