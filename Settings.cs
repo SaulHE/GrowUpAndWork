@@ -40,6 +40,7 @@ namespace GrowUpAndWork
         public int BecomeHeroAge { get; set; } = 14;
         
         // Could be working , but when mc died, if you are waiting in a city or castle, it could crash
+        // The up crash is fixed by me
         [XmlElement]
 #if LAN_ZH
         [SettingProperty("所有人物的最大年龄", 50, 120, "注意，卡拉迪亚大陆所有的NPC以及玩家的角色将在达到您设置的最大年龄后死亡")]

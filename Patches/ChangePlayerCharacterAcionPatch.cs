@@ -3,7 +3,6 @@ using GrowUpAndWorkLib.Debugging;
 using HarmonyLib;
 using Helpers;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.ViewModelCollection.GameMenu;
 
 namespace GrowUpAndWork.Patches
 {
