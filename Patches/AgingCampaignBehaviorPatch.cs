@@ -19,12 +19,11 @@ namespace GrowUpAndWork.Patches
             int counter = 0;
             foreach (var hero in Hero.All.ToList<Hero>())
             {
-                if (hero != null && !hero.IsDead hero )
+                if (hero != null && !hero.IsDead && hero.IsNoble)
                 {
                     if (hero.Age >= SettingClass.Instance.MaxAge)
                     {
                         KillCharacterAction.ApplyByOldAge(hero, true);
-                        KillCharacterAction.ApplyInternal(victim, (Hero) null, KillCharacterAction.KillCharacterActionDetail.DiedOfOldAge, true);
                         counter += 1;
                     }
                 }
