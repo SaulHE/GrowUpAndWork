@@ -1,4 +1,5 @@
-﻿using System;
+﻿// #define DEBUG_MODE_G
+using System;
 using System.Threading;
 using System.Windows.Forms;
 using GrowUpAndWork;
@@ -10,8 +11,10 @@ namespace GrowUpAndWorkLib.Debugging
 {
     public class GrowthDebug
     {
-        private static Logger log  = new LoggerConfiguration().WriteTo.File(SettingClass.LogFileName,
-                rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes:90000000).CreateLogger();
+        private static Logger log = new LoggerConfiguration().WriteTo.File(SettingClass.LogFileName,
+                rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 90000000)
+            .CreateLogger();
+
         public static void ShowMessageInBox(string message)
         {
             MessageBox.Show($"{message}", "This is a log Info");
@@ -21,7 +24,7 @@ namespace GrowUpAndWorkLib.Debugging
         {
             if (string.IsNullOrWhiteSpace(title))
                 title = "";
-            
+
             MessageBox.Show($"{message}\n\n{exception?.ToStringFull()}", title);
 
             LogError(message, title, exception);
@@ -29,10 +32,11 @@ namespace GrowUpAndWorkLib.Debugging
 
         public static void LogInfo(string message, string title = "")
         {
-
+#if DEBUG_MODE_G
             log.Information("------------");
             log.Information($"title: {title}, Pure Log");
             log.Information($"{message}");
+#endif
         }
 
         public static void LogError(string message, string title = "", Exception exception = null)
@@ -55,6 +59,5 @@ namespace GrowUpAndWorkLib.Debugging
             String logFileName = SettingClass.LogFileName;
             LogInfo(message, title);
         }
-        
     }
 }

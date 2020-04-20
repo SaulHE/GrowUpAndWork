@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using GrowUpAndWorkLib;
 using GrowUpAndWorkLib.Debugging;
+using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.CampaignSystem.SandBox.GameComponents;
@@ -15,9 +16,13 @@ namespace GrowUpAndWork.GrowthClasses
     {
         public static void Inherit(Hero targetInheriter)
         {
+            if (targetInheriter == null)
+            {
+                return;
+            }
             try
             {
-                GrowthDebug.LogInfo("Enter inherit method");
+                GrowthDebug.LogInfo($"Enter inherit method, handling inherit of {targetInheriter}");
 
                 targetInheriter.ClearSkills();
                 targetInheriter.HeroDeveloper.ClearHeroLevel();
@@ -37,9 +42,11 @@ namespace GrowUpAndWork.GrowthClasses
 
                 foreach (SkillObject skillIT in DefaultSkills.GetAllSkills())
                 {
+                    Hero InheritFather = targetInheriter.Father != null ? targetInheriter.Father : targetInheriter;
+                    Hero InheritMother = targetInheriter.Mother != null ? targetInheriter.Mother : targetInheriter;
                     targetInheriter.HeroDeveloper.ChangeSkillLevel(skillIT,
-                        targetInheriter.Father.GetSkillValue(skillIT) / fatherInheritDivider +
-                        targetInheriter.Mother.GetSkillValue(skillIT) / motherInheritDivider, false);
+                        InheritFather.GetSkillValue(skillIT) / fatherInheritDivider +
+                        InheritMother.GetSkillValue(skillIT) / motherInheritDivider, false);
                 }
 
                 targetInheriter.Level = 0;
