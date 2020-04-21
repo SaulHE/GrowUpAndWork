@@ -1,4 +1,4 @@
-﻿#define LAN_ZH
+﻿// #define LAN_ZH
 using System.Configuration;
 using System.Xml.Serialization;
 using GrowUpAndWorkLib;
@@ -19,14 +19,14 @@ namespace GrowUpAndWork
         }
 
         [XmlElement] public override string ID { get; set; } = InstanceID;
-        public override string ModuleFolderName { get; } = "GrowUpAndWork";
+        public override string ModuleFolderName { get; } = "zGrowUpAndWork";
         public override string ModName { get; } = "GrowUpAndWork";
 
         public bool IsDebugMode { get; set; } = true;
 
         public static string CurrentLanguage = "en";
 
-        public static string LogFileName { get; set; } = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
+        public static string LogFileName { get; set; } = BasePath.Name + "\\Modules\\zGrowUpAndWork" + "\\" + "log.txt";
 
         // Tested
         [XmlElement]
@@ -89,11 +89,11 @@ namespace GrowUpAndWork
 #if LAN_ZH
         [SettingProperty("设置孕期", 10, 80,
             "一个女性角色怀孕多少天后可以生下孩子, 原版的设置值是36天。最大可以设置到80天")]
-        [SettingPropertyGroup("年龄成长系统")]
+        [SettingPropertyGroup("怀孕系统设置")]
 #else
         [SettingProperty("Duration of Pregnancy(Days)", 10, 80,
             "The number of days from a woman's conception to the birth of child in all Calradia . Native value is 36")]
-        [SettingPropertyGroup("Aging System Tweak")]
+        [SettingPropertyGroup("Pregnancy Setting")]
 #endif
         public int PregnancyDurationInDays { get; set; } = 36;
 

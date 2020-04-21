@@ -14,12 +14,61 @@ namespace GrowUpAndWork.GrowthClasses
 {
     public class InheritHelper
     {
+        public static void FixCappedKids()
+        {
+            Hero.MainHero.Children.ForEach((kid) =>
+            {
+                if (!kid.IsChild)
+                {
+                    bool ShouldFixChildrenFlag = false;
+                    int CappedSkillCounter = 0;
+                    int SkillTotal = 0;
+
+                    foreach (var skillObject in DefaultSkills.GetAllSkills())
+                    {
+                        SkillTotal += kid.GetSkillValue(skillObject);
+                        if (kid.HeroDeveloper.GetSkillXpProgress(skillObject) < 0)
+                        {
+                            CappedSkillCounter++;
+                        }
+
+                        if (CappedSkillCounter > 3)
+                        {
+                            ShouldFixChildrenFlag = true;
+                            break;
+                        }
+                    }
+
+                    if (SkillTotal <= 5 && kid.Level > 7)
+                    {
+                        ShouldFixChildrenFlag = true;
+                    }
+
+                    if (kid.HeroDeveloper.GetTotalSkillPoints() < 5)
+                    {
+                        ShouldFixChildrenFlag = true;
+                    }
+
+                    if (ShouldFixChildrenFlag)
+                    {
+                        InformationManager.DisplayMessage(new InformationMessage(
+                            SettingClass.CurrentLanguage == "zh"
+                                ? $"检测到你的孩子{kid.Name}属性异常, 已经修复"
+                                : $"Detected Your Child{kid.Name}'s stats are abnormal, already fixed", Colors.Magenta));
+                        GrowthDebug.LogInfo($"Detected Your Child{kid.Name}'s stats are abnormal, already fixed", "Fixed");
+                        Inherit(kid);
+                    }
+                }
+            });
+        }
+
         public static void Inherit(Hero targetInheriter)
         {
             if (targetInheriter == null)
             {
                 return;
             }
+
             try
             {
                 GrowthDebug.LogInfo($"Enter inherit method, handling inherit of {targetInheriter}");
@@ -50,10 +99,9 @@ namespace GrowUpAndWork.GrowthClasses
                 }
 
                 targetInheriter.Level = 0;
-                
+
                 targetInheriter.HeroDeveloper.UnspentFocusPoints += 10;
                 targetInheriter.HeroDeveloper.UnspentAttributePoints += 10;
-                
             }
             catch (Exception e)
             {
