@@ -1,4 +1,4 @@
-﻿// #define LAN_ZH
+﻿#define LAN_ZH
 using System.Configuration;
 using System.Xml.Serialization;
 using GrowUpAndWorkLib;

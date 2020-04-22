@@ -18,7 +18,7 @@ namespace GrowUpAndWork.GrowthClasses
         {
             Hero.MainHero.Children.ForEach((kid) =>
             {
-                if (!kid.IsChild)
+                if (!kid.IsChild || kid.Age < 30)
                 {
                     bool ShouldFixChildrenFlag = false;
                     int CappedSkillCounter = 0;
@@ -35,7 +35,6 @@ namespace GrowUpAndWork.GrowthClasses
                         if (CappedSkillCounter > 3)
                         {
                             ShouldFixChildrenFlag = true;
-                            break;
                         }
                     }
 
@@ -44,7 +43,22 @@ namespace GrowUpAndWork.GrowthClasses
                         ShouldFixChildrenFlag = true;
                     }
 
-                    if (kid.HeroDeveloper.GetTotalSkillPoints() < 5)
+                    if (kid.HeroDeveloper.GetTotalSkillPoints() < 80)
+                    {
+                        ShouldFixChildrenFlag = true;
+                    }
+
+
+                    int attrAccumulator = 0;
+                    foreach (var VARIABLE in  CharacterAttributes.All)
+                    {
+                        attrAccumulator += kid.GetAttributeValue(VARIABLE.AttributeEnum); 
+                    }
+
+                    attrAccumulator += kid.HeroDeveloper.UnspentAttributePoints;
+                    GrowthDebug.LogInfo($"Kids{kid.Name} attribute sum: {attrAccumulator}");
+                    
+                    if (attrAccumulator < 9 && kid.Level > 8)
                     {
                         ShouldFixChildrenFlag = true;
                     }
