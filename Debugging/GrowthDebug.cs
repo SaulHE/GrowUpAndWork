@@ -3,7 +3,6 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using GrowUpAndWork;
-using ModLib;
 using Serilog;
 using Serilog.Core;
 
@@ -25,8 +24,7 @@ namespace GrowUpAndWorkLib.Debugging
             if (string.IsNullOrWhiteSpace(title))
                 title = "";
 
-            MessageBox.Show($"{message}\n\n{exception?.ToStringFull()}", title);
-
+            MessageBox.Show($"{message}\n\n{exception}", title);
             LogError(message, title, exception);
         }
 
@@ -43,7 +41,7 @@ namespace GrowUpAndWorkLib.Debugging
         {
             log.Information("============================================>");
             log.Information($"!!!This is An Error, Happens in {DateTime.Now.ToString()} : {title},");
-            log.Error($"{message} The detailed information is {exception.ToStringFull()}", exception);
+            log.Error($"{message} The detailed information is {exception}", exception);
             log.Information("<==============================================");
         }
 

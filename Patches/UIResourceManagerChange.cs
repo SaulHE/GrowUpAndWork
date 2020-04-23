@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using GrowUpAndWorkLib.Debugging;
 using HarmonyLib;
-using ModLib;
-using ModLib.Attributes;
-using ModLib.GUI.ViewModels;
+using TaleWorlds.Core;
 
 namespace GrowUpAndWork.Patches
 {
@@ -26,6 +25,19 @@ namespace GrowUpAndWork.Patches
             }
 
             return true;
+        }
+
+        static void Postfix()
+        {
+            try
+            {
+                GrowthDebug.LogInfo(GameTexts.FindText("GrowUpAndWork_charactermaxage", null).ToString());
+            }
+            catch (Exception e)
+            {
+                GrowthDebug.LogError("Testing string localization", "testing", e);
+                
+            }
         }
     }
 }

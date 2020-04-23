@@ -1,11 +1,15 @@
-﻿using System;
+﻿#define DEBUG
+using System;
+using CommunityPatch;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
 using GrowUpAndWorkLib.Debugging;
-using ModLib;
+using MBOptionScreen.Settings;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 
 namespace GrowUpAndWork
@@ -19,16 +23,16 @@ namespace GrowUpAndWork
             base.OnSubModuleLoad();
             try
             {
-                FileDatabase.Initialise(ModuleFolderName);
-
-                SettingsDatabase.RegisterSettings(
-                    ((SettingsBase) (FileDatabase.Get<SettingClass>(SettingClass.InstanceID) ?? new SettingClass())));
 
                 Harmony harmony = new Harmony("mod.growupandwork.kleinersilver");
                 harmony.PatchAll();
 
-                GrowthDebug.LogInfo("Mod Loaded");
-                GrowthDebug.LogInfo($"Current Language: {BannerlordConfig.Language}");
+                // GrowthDebug.LogInfo("Mod Loaded");
+                // GrowthDebug.LogInfo($"Current Language: {BannerlordConfig.Language}");
+                CommunityPatchSubModule.Print("abc");
+                Module.CurrentModule.GlobalTextManager.LoadGameTexts($"{BasePath.Name}/Modules/{ModuleFolderName}/ModuleData/module_strings.xml");
+                
+                
             }
             catch (Exception e)
             {
