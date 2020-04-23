@@ -40,5 +40,6 @@
 
     <string id="HTI4MLDx" text="Main Hero's Clan Pregnancy Probability" />
     <string id="XTumVh4r" text="The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0" />
+
   </strings>
 </base>

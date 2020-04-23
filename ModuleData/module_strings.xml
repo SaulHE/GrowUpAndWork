@@ -37,5 +37,9 @@
       
     <string id="str_daily_pregnancy_chance_mc" text="{=HTI4MLDx}Main Hero's Clan Pregnancy Probability" />
     <string id="str_daily_pregnancy_chance_mc_hint" text="{=XTumVh4r}The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0" />
+
+    <string id="str_one_year_aging_notification" text="{=PnigYvWZ}Now your child: {hero.Name} is {(int) hero.Age} years old"/>
+      
+    <string id="str_inheritance_notification" text="{=MWbLLpPG}Your child{hero.Name} inherits from its parents and become capable in many fields"/>
   </strings>
 </base>

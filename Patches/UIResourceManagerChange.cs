@@ -29,15 +29,6 @@ namespace GrowUpAndWork.Patches
 
         static void Postfix()
         {
-            try
-            {
-                GrowthDebug.LogInfo(GameTexts.FindText("GrowUpAndWork_charactermaxage", null).ToString());
-            }
-            catch (Exception e)
-            {
-                GrowthDebug.LogError("Testing string localization", "testing", e);
-                
-            }
         }
     }
 }

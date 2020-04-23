@@ -1,7 +1,4 @@
-﻿// #define LAN_ZH
-
-using System.Configuration;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using TaleWorlds.Library;
 using MBOptionScreen.Attributes;
 using MBOptionScreen.Settings;
@@ -11,7 +8,7 @@ namespace GrowUpAndWork
     public class SettingClass : AttributeSettings<SettingClass>
     {
         //Please change the ID when you update the game.
-        public const string InstanceID = "kleinersilver.GrowUpAndWork_v112";
+        public const string InstanceID = "kleinersilver.GrowUpAndWork_v1_1_2";
 
         [XmlElement] public override string Id { get; set; } = InstanceID;
 

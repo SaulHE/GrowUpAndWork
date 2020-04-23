@@ -1,5 +1,4 @@
-﻿#define DEBUG
-using System;
+﻿using System;
 using CommunityPatch;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
@@ -29,7 +28,7 @@ namespace GrowUpAndWork
 
                 // GrowthDebug.LogInfo("Mod Loaded");
                 // GrowthDebug.LogInfo($"Current Language: {BannerlordConfig.Language}");
-                CommunityPatchSubModule.Print("abc");
+                // CommunityPatchSubModule.Print("abc");
                 Module.CurrentModule.GlobalTextManager.LoadGameTexts($"{BasePath.Name}/Modules/{ModuleFolderName}/ModuleData/module_strings.xml");
                 
                 

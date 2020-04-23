@@ -46,11 +46,11 @@ namespace GrowUpAndWork.Patches
             int currentAge = (int) hero.Age;
             if ((int) hero.Age < SettingClass.Instance.GrowthStopAge)
             {
-                hero.BirthDay = HeroHelper.GetRandomBirthDayForAge((int)hero.Age + 1);
+                hero.BirthDay = HeroHelper.GetRandomBirthDayForAge((int) hero.Age + 1);
             }
 
             currentAge = (int) hero.Age;
-            
+
             return currentAge;
         }
 
@@ -99,7 +99,8 @@ namespace GrowUpAndWork.Patches
                         : new TextObject($"Now your child: {hero.Name} is {(int) hero.Age} years old"), 0,
                     null, "event:/ui/notification/quest_update");
 
-                if (hero.Age >= SettingClass.Instance.BecomeHeroAge)
+                
+                if (hero.Age >= SettingClass.Instance.BecomeHeroAge && hero.Age <= SettingClass.Instance.GrowthStopAge)
                 {
                     // Only Main Heros get the notification
                     InformationManager.AddQuickInformation(
@@ -111,7 +112,7 @@ namespace GrowUpAndWork.Patches
                 }
             }
 
-            if ((int) hero.Age >= SettingClass.Instance.BecomeHeroAge)
+            if ((int) hero.Age >= SettingClass.Instance.BecomeHeroAge && (int)hero.Age <= SettingClass.Instance.GrowthStopAge)
             {
                 if (hero.Mother != null)
                 {
@@ -146,9 +147,9 @@ namespace GrowUpAndWork.Patches
                             : new TextObject(
                                 $"Your child{hero.Name} inherits from its parents and become capable in many fields"),
                         0, null, "event:/ui/notification/quest_finished");
+                    
                 }
             }
-
 
             currentAge = (int) hero.Age;
             return currentAge;
@@ -217,7 +218,7 @@ namespace GrowUpAndWork.Patches
             {
                 int numberOfNobleChildrenGrow = 0;
                 int numberOfNotableChildrenGrow = 0;
-                
+
                 if ((int) (Campaign.Current.CampaignStartTime.ElapsedDaysUntilNow %
                            SettingClass.Instance.ChildrenGrowthCycle) == 0)
                 {
@@ -253,7 +254,7 @@ namespace GrowUpAndWork.Patches
                             Colors.Cyan));
                     GrowthDebug.LogInfo($"Today, {numberOfNobleChildrenGrow} noble children grow faster in Calradia");
                 }
-                
+
                 if (numberOfNotableChildrenGrow > 0)
                 {
                     InformationManager.DisplayMessage(SettingClass.CurrentLanguage == "zh"
@@ -261,7 +262,8 @@ namespace GrowUpAndWork.Patches
                         : new InformationMessage(
                             $"Today, {numberOfNotableChildrenGrow} notable children grow up faster in the world of Calradia",
                             Colors.Cyan));
-                    GrowthDebug.LogInfo($"Today, {numberOfNotableChildrenGrow} notable children grow faster in Calradia");
+                    GrowthDebug.LogInfo(
+                        $"Today, {numberOfNotableChildrenGrow} notable children grow faster in Calradia");
                 }
             }
 

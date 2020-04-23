@@ -40,5 +40,7 @@
 
     <string id="HTI4MLDx" text="主角家族女性的怀孕几率" />
     <string id="XTumVh4r" text="设置主角家族中女性的怀孕概率, 设置为0将不会怀孕, 设置为1.0您家族的女性只要有机会就会怀孕. 原版的值为0.95" />
+
+
   </strings>
 </base>
