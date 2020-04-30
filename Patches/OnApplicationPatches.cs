@@ -4,8 +4,6 @@ using HarmonyLib;
 
 namespace GrowUpAndWork.Patches
 {
-    
-       
        [HarmonyPatch(typeof(TaleWorlds.Engine.TestContext), "OnApplicationTick")]
        public class OnApplicationTickPatchOfTestContext
        {

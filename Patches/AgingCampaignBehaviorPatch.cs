@@ -99,7 +99,7 @@ namespace GrowUpAndWork.Patches
                         : new TextObject($"Now your child: {hero.Name} is {(int) hero.Age} years old"), 0,
                     null, "event:/ui/notification/quest_update");
 
-                
+
                 if (hero.Age >= SettingClass.Instance.BecomeHeroAge && hero.Age <= SettingClass.Instance.GrowthStopAge)
                 {
                     // Only Main Heros get the notification
@@ -112,7 +112,8 @@ namespace GrowUpAndWork.Patches
                 }
             }
 
-            if ((int) hero.Age >= SettingClass.Instance.BecomeHeroAge && (int)hero.Age <= SettingClass.Instance.GrowthStopAge)
+            if ((int) hero.Age >= SettingClass.Instance.BecomeHeroAge &&
+                (int) hero.Age <= SettingClass.Instance.GrowthStopAge)
             {
                 if (hero.Mother != null)
                 {
@@ -145,9 +146,8 @@ namespace GrowUpAndWork.Patches
                         SettingClass.CurrentLanguage == "zh"
                             ? new TextObject($"你的孩子{hero.Name}从父母那里继承了部分能力, 在许多方面都突出常人")
                             : new TextObject(
-                                $"Your child{hero.Name} inherits from its parents and become capable in many fields"),
+                                $"Your child {hero.Name} inherits from its parents and become capable in many fields"),
                         0, null, "event:/ui/notification/quest_finished");
-                    
                 }
             }
 
@@ -198,14 +198,18 @@ namespace GrowUpAndWork.Patches
     {
         static bool Prefix()
         {
-            int howMany = AgingSystemHelper.KillOverAgedHero();
-            if (howMany > 0)
+            if (SettingClass.Instance.EnableHeroOverAgeDeath)
             {
-                InformationManager.AddQuickInformation(
-                    SettingClass.CurrentLanguage == "zh"
-                        ? new TextObject($"很不幸, 今天有{howMany}位卡拉迪亚的战士因为衰老和疾病永远离开了我们。")
-                        : new TextObject($"Unfortunately, {howMany} Hero(s) in Calradia died because of old age today"),
-                    0, null, "event:/ui/notification/death");
+                int howMany = AgingSystemHelper.KillOverAgedHero();
+                if (howMany > 0)
+                {
+                    InformationManager.AddQuickInformation(
+                        SettingClass.CurrentLanguage == "zh"
+                            ? new TextObject($"很不幸, 今天有{howMany}位卡拉迪亚的战士因为衰老和疾病永远离开了我们。")
+                            : new TextObject(
+                                $"Unfortunately, {howMany} Hero(s) in Calradia died because of old age today"),
+                        0, null, "event:/ui/notification/death");
+                }
             }
 
             return true;

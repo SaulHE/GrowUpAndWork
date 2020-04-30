@@ -1,4 +1,4 @@
-﻿#define DEBUG_MODE_G
+﻿// #define DEBUG_MODE_G
 using System;
 using System.Threading;
 using System.Windows.Forms;

@@ -1,7 +1,9 @@
 ﻿using System.Xml.Serialization;
-using TaleWorlds.Library;
 using MBOptionScreen.Attributes;
+using MBOptionScreen.Attributes.v1;
 using MBOptionScreen.Settings;
+using TaleWorlds.Library;
+
 
 namespace GrowUpAndWork
 {
@@ -20,9 +22,15 @@ namespace GrowUpAndWork
 
         public static string LogFileName { get; set; } = BasePath.Name + "\\Modules\\zGrowUpAndWork" + "\\" + "log.txt";
 
+        [SettingProperty(displayName: "Enable Overage Hero Death",
+            hintText: "If Enabled, everyone will die after Max Age set")]
+        [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
+        public bool EnableHeroOverAgeDeath { get; set; } = false;
+
         // Tested
         [SettingProperty(displayName: "{=sNMtk43F}Child Becoming Hero Age", minValue: 6, maxValue: 18,
-            hintText: "{=ExJ1wdfd}The age at which kids of Calradia become a playable hero. Recommend setting to a value greater than 14. Otherwise sometimes NPCs will spawn as small kids")]
+            hintText:
+            "{=ExJ1wdfd}The age at which kids of Calradia become a playable hero. Recommend setting to a value greater than 14. Otherwise sometimes NPCs will spawn as small kids")]
         [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
         public int BecomeHeroAge { get; set; } = 14;
 
@@ -36,7 +44,8 @@ namespace GrowUpAndWork
 
         // Tested
         [SettingProperty(displayName: "{=ISDCqOXS}How many days your child grows at", minValue: 2, maxValue: 84,
-            hintText: "{=1stHpPnB}How many days your children need to grow one year older. In Native 1 year is 84 days")]
+            hintText:
+            "{=1stHpPnB}How many days your children need to grow one year older. In Native 1 year is 84 days")]
         [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
         public int ChildrenGrowthCycle { get; set; } = 25;
 
@@ -63,12 +72,14 @@ namespace GrowUpAndWork
         // Tested
 
         [SettingProperty(displayName: "{=n2sy7FxF}Disable Maternal Mortality(All Character)",
-            hintText: "{=IMb7ESZb}If enabled, all female characters in Calradia will never die of dystocia. In native female characters might die when giving birth to a child")]
+            hintText:
+            "{=IMb7ESZb}If enabled, all female characters in Calradia will never die of dystocia. In native female characters might die when giving birth to a child")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
         public bool DisableMaternalMortality { get; set; } = false;
 
         //Tested
-        [SettingProperty(displayName: "{=cYZ8Vsfu}Still Birth Probability", minValue: 0.0f, maxValue: 1.0f, requireRestart: true,
+        [SettingProperty(displayName: "{=cYZ8Vsfu}Still Birth Probability", minValue: 0.0f, maxValue: 1.0f,
+            requireRestart: true,
             hintText:
             "{=5vUseYr9}The probability of all kids in Calradia dying of stillbirth. Native value is 0.01. Set to 0 to disable, set to 1.0 to kill every child at birth")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
@@ -77,18 +88,22 @@ namespace GrowUpAndWork
 
         //Tested
         [SettingProperty(displayName: "{=fOCA7c4O}Max Pregnant Age", minValue: 30, maxValue: 60,
-            hintText: "{=SGTv7OWL}The maximum age for all female characters to get pregnant in Calradia. Native Value is 45")]
+            hintText:
+            "{=SGTv7OWL}The maximum age for all female characters to get pregnant in Calradia. Native Value is 45")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
         public int MaxPregnantAge { get; set; } = 45;
 
         [SettingProperty(displayName: "{=IA36Xmzq}Min Pregnant Age", minValue: 12, maxValue: 22,
-            hintText: "{=219pBKJa}The minimum age for all female characters to get pregnant in Calradia. Native Value is 18")]
+            hintText:
+            "{=219pBKJa}The minimum age for all female characters to get pregnant in Calradia. Native Value is 18")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
         public int MinPregnantAge { get; set; } = 18;
 
         //Tested
-        [SettingProperty(displayName: "{=HTI4MLDx}Main Hero's Clan Pregnancy Probability", minValue: 0.0f, maxValue: 1.0f,
-            hintText: "{=XTumVh4r}The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0")]
+        [SettingProperty(displayName: "{=HTI4MLDx}Main Hero's Clan Pregnancy Probability", minValue: 0.0f,
+            maxValue: 1.0f,
+            hintText:
+            "{=XTumVh4r}The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
         public float DailyPregnancyChanceOfTheMC { get; set; } = 0.95f;
     }

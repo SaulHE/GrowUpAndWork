@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using GrowUpAndWorkLib;
 using GrowUpAndWorkLib.Debugging;
-using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents;
 using TaleWorlds.Core;
-using TaleWorlds.Engine;
 using TaleWorlds.Library;
 
 namespace GrowUpAndWork.GrowthClasses
@@ -18,7 +13,7 @@ namespace GrowUpAndWork.GrowthClasses
         {
             Hero.MainHero.Children.ForEach((kid) =>
             {
-                if (!kid.IsChild || kid.Age < 30)
+                if (!kid.IsChild && kid.Age < 30)
                 {
                     bool ShouldFixChildrenFlag = false;
                     int CappedSkillCounter = 0;
@@ -32,18 +27,18 @@ namespace GrowUpAndWork.GrowthClasses
                             CappedSkillCounter++;
                         }
 
-                        if (CappedSkillCounter > 3)
+                        if (CappedSkillCounter > 5)
                         {
                             ShouldFixChildrenFlag = true;
                         }
                     }
 
-                    if (SkillTotal <= 5 && kid.Level > 7)
+                    if (SkillTotal <= 10 && kid.Level > 5)
                     {
                         ShouldFixChildrenFlag = true;
                     }
 
-                    if (kid.HeroDeveloper.GetTotalSkillPoints() < 80)
+                    if (kid.HeroDeveloper.GetTotalSkillPoints() < 80 && kid.Level >= 5)
                     {
                         ShouldFixChildrenFlag = true;
                     }
@@ -63,12 +58,17 @@ namespace GrowUpAndWork.GrowthClasses
                         ShouldFixChildrenFlag = true;
                     }
 
+                    if (attrAccumulator >= 10 || kid.Level == 0)
+                    {
+                        ShouldFixChildrenFlag = false;
+                    }
+
                     if (ShouldFixChildrenFlag)
                     {
                         InformationManager.DisplayMessage(new InformationMessage(
                             SettingClass.CurrentLanguage == "zh"
                                 ? $"检测到你的孩子{kid.Name}属性异常, 已经修复"
-                                : $"Detected Your Child{kid.Name}'s stats are abnormal, already fixed", Colors.Magenta));
+                                : $"Detected Your Child {kid.Name}'s stats are abnormal, already fixed", Colors.Magenta));
                         GrowthDebug.LogInfo($"Detected Your Child{kid.Name}'s stats are abnormal, already fixed", "Fixed");
                         Inherit(kid);
                     }
@@ -114,8 +114,8 @@ namespace GrowUpAndWork.GrowthClasses
 
                 targetInheriter.Level = 0;
 
-                targetInheriter.HeroDeveloper.UnspentFocusPoints += 10;
-                targetInheriter.HeroDeveloper.UnspentAttributePoints += 10;
+                targetInheriter.HeroDeveloper.UnspentFocusPoints = 10;
+                targetInheriter.HeroDeveloper.UnspentAttributePoints = 10;
             }
             catch (Exception e)
             {
