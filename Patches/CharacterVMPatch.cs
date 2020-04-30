@@ -10,7 +10,10 @@ namespace GrowUpAndWork.Patches
         {
             static void Postfix()
             {
-                InheritHelper.FixCappedKids();
+                if (SettingClass.Instance.EnableAutoFixBrokenKids)
+                {
+                    InheritHelper.FixCappedKids();
+                }
             }
         }
 }

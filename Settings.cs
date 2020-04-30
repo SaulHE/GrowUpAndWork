@@ -26,6 +26,12 @@ namespace GrowUpAndWork
             hintText: "If Enabled, everyone will die after Max Age set")]
         [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
         public bool EnableHeroOverAgeDeath { get; set; } = false;
+        
+        //Add an option to enable fix children
+        [SettingProperty(displayName: "Enable Autodetecting broken children and fix them",
+            hintText: "Only enable when you have kids with negative skill xp and cannot level up")]
+        [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
+        public bool EnableAutoFixBrokenKids { get; set; } = false;
 
         // Tested
         [SettingProperty(displayName: "{=sNMtk43F}Child Becoming Hero Age", minValue: 6, maxValue: 18,
@@ -106,5 +112,6 @@ namespace GrowUpAndWork
             "{=XTumVh4r}The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0")]
         [SettingPropertyGroup("{=t7P6z2aQ}Pregnancy Setting")]
         public float DailyPregnancyChanceOfTheMC { get; set; } = 0.95f;
+        
     }
 }
