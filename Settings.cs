@@ -10,9 +10,7 @@ namespace GrowUpAndWork
     public class SettingClass : AttributeSettings<SettingClass>
     {
         //Please change the ID when you update the game.
-        public const string InstanceID = "kleinersilver.GrowUpAndWork_v1_1_2";
-
-        [XmlElement] public override string Id { get; set; } = InstanceID;
+        [XmlElement] public override string Id { get; set; } = "kleinersilver.GrowUpAndWork_v1_1_4";
 
         public override string ModuleFolderName { get; } = "zGrowUpAndWork";
 
@@ -28,7 +26,7 @@ namespace GrowUpAndWork
         public bool EnableHeroOverAgeDeath { get; set; } = false;
         
         //Add an option to enable fix children
-        [SettingProperty(displayName: "Enable Autodetecting broken children and fix them",
+        [SettingProperty(displayName: "Enable auto-fixing broken kids",
             hintText: "Only enable when you have kids with negative skill xp and cannot level up")]
         [SettingPropertyGroup("{=Ff59cH4f}Aging System Tweak")]
         public bool EnableAutoFixBrokenKids { get; set; } = false;
