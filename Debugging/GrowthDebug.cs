@@ -1,18 +1,21 @@
-﻿// #define DEBUG_MODE_G
+﻿#define DEBUG_MODE_G
 using System;
 using System.Threading;
 using System.Windows.Forms;
 using GrowUpAndWork;
-using Serilog;
-using Serilog.Core;
+using HarmonyLib;
 
 namespace GrowUpAndWorkLib.Debugging
 {
     public class GrowthDebug
     {
-        private static Logger log = new LoggerConfiguration().WriteTo.File(SettingClass.LogFileName,
-                rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 90000000)
-            .CreateLogger();
+        // private static Logger log = new LoggerConfiguration().WriteTo.File(SettingClass.LogFileName,
+        //         rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 90000000)
+        //     .CreateLogger();
+        public GrowthDebug()
+        {
+            HarmonyLib.FileLog.logPath = SettingClass.LogFileName;
+        }
 
         public static void ShowMessageInBox(string message)
         {
@@ -31,18 +34,18 @@ namespace GrowUpAndWorkLib.Debugging
         public static void LogInfo(string message, string title = "")
         {
 #if DEBUG_MODE_G
-            log.Information("------------");
-            log.Information($"title: {title}, Pure Log");
-            log.Information($"{message}");
+            FileLog.Log("--------------");
+            FileLog.Log($"title: {title}, Pure Log");
+            FileLog.Log($"{message}");
 #endif
         }
 
         public static void LogError(string message, string title = "", Exception exception = null)
         {
-            log.Information("============================================>");
-            log.Information($"!!!This is An Error, Happens in {DateTime.Now.ToString()} : {title},");
-            log.Error($"{message} The detailed information is {exception}", exception);
-            log.Information("<==============================================");
+            FileLog.Log($"============={title}===============================>");
+            FileLog.Log($"!!!This is An Error, Happens in {DateTime.Now.ToString()}");
+            FileLog.Log($"{message} The detailed information is {exception.ToString()}");
+            FileLog.Log("<===================================================");
         }
 
         public static void ShowMessage(string message, string title = "", bool nonModal = false)
