@@ -1,4 +1,6 @@
 ﻿using System;
+using Fasterflect;
+using GrowUpAndWork.Data;
 using GrowUpAndWork.GrowthClasses;
 using HarmonyLib;
 using GrowUpAndWorkLib.Debugging;
@@ -8,6 +10,7 @@ using TaleWorlds.MountAndBlade;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
 
 
 namespace GrowUpAndWork
@@ -52,7 +55,7 @@ namespace GrowUpAndWork
                 if (!(game.GameType is Campaign))
                     return;
                 CampaignGameStarter gameInitializer = (CampaignGameStarter) gameStarterObject;
-                GrowthDebug.LogInfo("Campaign Game Started");
+                gameInitializer.AddBehavior(GrowUpAndWorkAgingCampaignBehavior.Instance);
             }
             catch (Exception e)
             {
@@ -60,5 +63,20 @@ namespace GrowUpAndWork
                     "Game Starting GrowUpAndWork Error", e);
             }
         }
+        //The following code fix the wrong encyclopedia link for good.
+        //Move the fix to a dependent
+
+        /*
+        public override void OnGameInitializationFinished(Game game)
+        {
+            base.OnGameInitializationFinished(game);
+            
+            HeroStringIdManager.SyncMBCharacterStringIdToHeroStringIdManager();
+            HeroStringIdManager.LogAllStringIdofManager();
+            
+            MBObjectManager.Instance.TrySetFieldValue("_lastGeneratedId",HeroStringIdManager.GenerateNonDuplicateStringIdNum());
+            GrowthDebug.LogInfo($"the last generatedId is {MBObjectManager.Instance.TryGetFieldValue("_lastGeneratedId")}");
+        }
+    */
     }
 }

@@ -25,25 +25,6 @@ namespace GrowUpAndWork.Behaviour
                 new Action<CampaignGameStarter>(this.OnSessionLaunched));
         }
 
-        public void PrintData()
-        {
-            GrowthDebug.LogInfo($"The cycleCount is {this._growthData.CycleCount}");
-            GrowthDebug.LogInfo($"The beenRunBefore boolean is {this._growthData.BeenRunBefore}");
-        }
-
-        public int IncreaseCount()
-        {
-            String logFileName = BasePath.Name + "\\Modules\\GrowUpAndWork" + "\\" + "log.txt";
-            int res = this._growthData.increaseCycleCount(); 
-            return res;
-
-        }
-
-        public int initCycleCount()
-        {
-            this._growthData.setCycleCount(0);
-            return this._growthData.CycleCount;
-        }
 
 
         private void OnSessionLaunched(CampaignGameStarter cgs)
