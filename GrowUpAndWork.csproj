@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{9C2A621A-65B9-46DC-BB5F-C3CE5CF4E659}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>GrowUpAndWork</RootNamespace>
+        <AssemblyName>GrowUpAndWork</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>8</LangVersion>
+        <GameFolder>G:\steam\installation\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Solid|AnyCPU' ">
+        <OutputPath>G:\steam\installation\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\zGrowUpAndWork\bin\Win64_Shipping_Client</OutputPath>
+        <PlatformTarget>x64</PlatformTarget>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Rename|AnyCPU' ">
+        <PlatformTarget>x64</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <OutputPath>$(GameFolder)\Modules\zGrowUpAndWork\bin\Win64_Shipping_Client</OutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <ResourceFolder Include="Resource\**\**\*.*"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="$(GameFolder)\bin\Win64_Shipping_Client\System.*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\bin\Win64_Shipping_Client\Steamworks.*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\Modules\Native\bin\Win64_Shipping_Client\*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\Modules\SandBox\bin\Win64_Shipping_Client\*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\Modules\SandBoxCore\bin\Win64_Shipping_Client\*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="$(GameFolder)\Modules\StoryMode\bin\Win64_Shipping_Client\*.dll">
+            <HintPath>%(Identity)</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="0Harmony, Version=2.0.0.10, Culture=neutral, PublicKeyToken=null">
+            <HintPath>..\packages\Lib.Harmony.2.0.0.10\lib\net472\0Harmony.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="Fasterflect, Version=2.1.3.0, Culture=neutral, PublicKeyToken=38d18473284c1ca7">
+            <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="MBOptionScreen.v2.0.10, Version=2.0.10.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>G:\steam\installation\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\Bannerlord.MBOptionScreen\bin\Win64_Shipping_Client\MBOptionScreen.v2.0.10.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.CSharp">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Core">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Data">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Windows.Forms">
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml">
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Bannerlord\GrowUpAndWorkSubModule.cs"/>
+        <Compile Include="Behaviour.cs"/>
+        <Compile Include="Data\HeroRangeEnum.cs"/>
+        <Compile Include="Data\HeroStringIdManager.cs"/>
+        <Compile Include="Debugging\DebugVars.cs"/>
+        <Compile Include="Debugging\GrowthDebug.cs"/>
+        <Compile Include="GrowthClasses.cs"/>
+        <Compile Include="Patches\AgeModelPatch.cs"/>
+        <Compile Include="Patches\AgingCampaignBehaviorPatch.cs"/>
+        <Compile Include="Patches\CharacterDevelopmentCampaignBehaviourPatch.cs"/>
+        <Compile Include="Patches\CharacterObjectPatch.cs"/>
+        <Compile Include="Patches\CharacterVMPatch.cs"/>
+        <Compile Include="Patches\HeroCreatorPatch.cs"/>
+        <Compile Include="Patches\KillCharacterActionPatch.cs"/>
+        <Compile Include="Patches\MBObjectManagerPatch.cs"/>
+        <Compile Include="Patches\ModulePatches.cs"/>
+        <Compile Include="Patches\OnApplicationPatches.cs"/>
+        <Compile Include="Patches\PregnancyModelPatch.cs"/>
+        <Compile Include="Patches\ChangePlayerCharacterAcionPatch.cs"/>
+        <Compile Include="Patches\SettlementMenuOverlayVMPatch.cs"/>
+        <Compile Include="Patches\UIResourceManagerChange.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Settings.cs"/>
+        <Compile Include="Utils\AgingSystemHelper.cs"/>
+        <Compile Include="Utils\Utils.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="packages.config"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+    <Target Name="AfterBuild">
+        <Copy SourceFiles="@(ResourceFolder)" DestinationFiles="@(ResourceFolder->'$(GameFolder)\Modules\zGrowUpAndWork\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    </Target>
+
+    <!--    <Target Name="PostBuild" AfterTargets="PostBuildEvent">-->
+    <!--        <Exec Command="if not exist &quot;$(GameFolder)\Modules\$(ProjectName)&quot; mkdir &quot;$(GameFolder)\Modules\$(ProjectName)&quot;"/>-->
+    <!--        <Copy SourceFiles="@(Libraries)" DestinationFiles="@(Libraries->'$(GameFolder)\Modules\$(ProjectName)\bin\Win64_Shipping_Client\%(RecursiveDir)%(Filename)%(Extension)')"/>-->
+    <!--        <Copy SourceFiles="@(Data)" DestinationFiles="@(Data->'$(GameFolder)\Modules\$(ProjectName)\%(RecursiveDir)%(Filename)%(Extension)')"/>-->
+    <!--    </Target>-->
+</Project>
