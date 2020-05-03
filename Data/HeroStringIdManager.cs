@@ -1,6 +1,6 @@
 ﻿namespace GrowUpAndWork.Data
 {
-    public enum HeroRange
+    public class HeroStringIdManager
     {
         
     }
