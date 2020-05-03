@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+    <Name value="GrowUpAndWork"/>
+    <Id value="zGrowUpAndWork"/>
+    <Version value="v1.1.5"/>
+    <DefaultModule value="false"/>
+    <SingleplayerModule value="true"/>
+    <MultiplayerModule value="false"/>
+    <Official value="false"/>
+    <DependedModules>
+        <DependedModule Id="Native"/>
+        <DependedModule Id="SandBoxCore"/>
+        <DependedModule Id="Sandbox"/>
+        <DependedModule Id="CustomBattle"/>
+        <DependedModule Id="StoryMode"/>
+    </DependedModules>>
+    <SubModules>
+        <SubModule>
+            <Name value="GrowUpAndWork"/>
+            <DLLName value="GrowUpAndWork.dll"/>
+            <SubModuleClassType value="GrowUpAndWork.SubModule"/>
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+        <SubModule>
+            <Name value="MBOptionScreen" />
+            <DLLName value="MBOptionScreen.v2.0.10.dll" />
+            <SubModuleClassType value="MBOptionScreen.MBOptionScreenSubModuleV2010" />
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+    </SubModules>
+</Module>

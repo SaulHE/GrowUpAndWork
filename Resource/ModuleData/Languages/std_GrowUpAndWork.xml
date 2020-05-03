@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="English" />
+  </tags>
+  <strings>
+    <string id="Ff59cH4f" text="Aging System Tweak" />
+    <string id="t7P6z2aQ" text="Pregnancy Setting" />
+      
+    <string id="sNMtk43F" text="Child Becoming Hero Age" />
+    <string id="ExJ1wdfd" text="The age at which kids of Calradia become a playable hero. Recommend setting to a value greater than 14. Otherwise sometimes NPCs will spawn as small kids" />
+      
+    <string id="GHqMmr55" text="Max Age" />
+    <string id="Z4e9stqr" text="Set the maximum age a character in Calradia could possibly live. Everyone in Calradia will die after reaching this age" />
+      
+    <string id="ISDCqOXS" text="How many days your child grows at" />
+    <string id="1stHpPnB" text="How many days your children need to grow one year older. In Native 1 year is 84 days" />
+
+    <string id="rzeuOFBk" text="Enable NPC Children Faster Growth" />
+    <string id="y5fvV0vl" text="If enabled, NPC's children will grow at the same rate as your children" />
+
+    <string id="QEHZzYvW" text="Growth Boost Stop Age" />
+    <string id="M4cE1DxI" text="The age after which your children will stop growing any faster. After this age, your children return to normal growth rate(1 year older per year)" />
+
+    <string id="FHdF0H2k" text="Duration of Pregnancy(Days)" />
+    <string id="c5V1OXKn" text="The number of days from a woman's conception to the birth of child in all Calradia . Native value is 36" />
+
+    <string id="n2sy7FxF" text="Disable Maternal Mortality(All Character)" />
+    <string id="IMb7ESZb" text="If enabled, all female characters in Calradia will never die of dystocia. In native female characters might die when giving birth to a child" />
+
+    <string id="cYZ8Vsfu" text="Still Birth Probability" />
+    <string id="5vUseYr9" text="The probability of all kids in Calradia dying of stillbirth. Native value is 0.01. Set to 0 to disable, set to 1.0 to kill every child at birth" />
+
+    <string id="fOCA7c4O" text="Max Pregnant Age" />
+    <string id="SGTv7OWL" text="The maximum age for all female characters to get pregnant in Calradia. Native Value is 45" />
+
+    <string id="IA36Xmzq" text="Min Pregnant Age" />
+    <string id="219pBKJa" text="The minimum age for all female characters to get pregnant in Calradia. Native Value is 18" />
+
+    <string id="HTI4MLDx" text="Main Hero's Clan Pregnancy Probability" />
+    <string id="XTumVh4r" text="The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0" />
+
+  </strings>
+</base>

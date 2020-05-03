@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <strings>
+    <string id="str_aging_system_tweak_groupname" text="{=Ff59cH4f}Aging System Tweak" />
+    <string id="str_pregnancy_setting" text="{=t7P6z2aQ}Pregnancy Setting" />
+    
+    <string id="str_child_become_hero_age" text="{=sNMtk43F}Child Becoming Hero Age" />
+    <string id="str_child_become_hero_age_hint" text="{=ExJ1wdfd}The age at which kids of Calradia become a playable hero. Recommend setting to a value greater than 14. Otherwise sometimes NPCs will spawn as small kids" />
+      
+    <string id="str_all_max_age" text="{=GHqMmr55}Max Age" />
+    <string id="str_all_max_age_hint" text="{=Z4e9stqr}Set the maximum age a character in Calradia could possibly live. Everyone in Calradia will die after reaching this age" />
+      
+    <string id="str_child_aging_cycle" text="{=ISDCqOXS}How many days your child grows at" />
+    <string id="str_child_aging_cycle_hint" text="{=1stHpPnB}How many days your children need to grow one year older. In Native 1 year is 84 days" />
+
+    <string id="str_npc_fastergrowth_enable" text="{=rzeuOFBk}Enable NPC Children Faster Growth" />
+    <string id="str_npc_fastergrowth_enable_hint" text="{=y5fvV0vl}If enabled, NPC's children will grow at the same rate as your children" />
+
+    <string id="str_growth_boost_stop_age" text="{=QEHZzYvW}Growth Boost Stop Age" />
+    <string id="str_growth_boost_stop_age_hint" text="{=M4cE1DxI}The age after which your children will stop growing any faster. After this age, your children return to normal growth rate(1 year older per year)" />
+
+    <string id="str_duration_of_pregnancy" text="{=M5BapPuS}Duration of Pregnancy(Days)" />
+    <string id="str_duration_of_pregnancy_hint" text="{=4lTfiOsz}The number of days from a woman's conception to the birth of child in all Calradia . Native value is 36" />
+
+    <string id="str_disable_maternal_mortality" text="{=h17m0AmY}Disable Maternal Mortality(All Character)" />
+    <string id="str_disable_maternal_mortality_hint" text="{=K48nT96O}If enabled, all female characters in Calradia will never die of dystocia. In native female characters might die when giving birth to a child" />
+      
+    <string id="str_still_birth_probability" text="{=cYZ8Vsfu}Still Birth Probability" />
+    <string id="str_still_birth_probability_hint" text="{=5vUseYr9}The probability of all kids in Calradia dying of stillbirth. Native value is 0.01. Set to 0 to disable, set to 1.0 to kill every child at birth" />
+
+    <string id="str_max_pregnant_age" text="{=fOCA7c4O}Max Pregnant Age" />
+    <string id="str_max_pregnant_age_hint" text="{=SGTv7OWL}The maximum age for all female characters to get pregnant in Calradia. Native Value is 45" />
+      
+    <string id="str_min_pregnant_age" text="{=IA36Xmzq}Min Pregnant Age" />
+    <string id="str_min_pregnant_age_hint" text="{=219pBKJa}The minimum age for all female characters to get pregnant in Calradia. Native Value is 18" />
+      
+    <string id="str_daily_pregnancy_chance_mc" text="{=HTI4MLDx}Main Hero's Clan Pregnancy Probability" />
+    <string id="str_daily_pregnancy_chance_mc_hint" text="{=XTumVh4r}The pregnancy probability of heros in the main character's clan. Setting to 0 means your clan members will no longer have any more children. Native value is close to 1.0" />
+
+    <string id="str_one_year_aging_notification" text="{=PnigYvWZ}Now your child: {hero.Name} is {(int) hero.Age} years old"/>
+      
+    <string id="str_inheritance_notification" text="{=MWbLLpPG}Your child{hero.Name} inherits from its parents and become capable in many fields"/>
+  </strings>
+</base>

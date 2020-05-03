@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="简体中文" />
+  </tags>
+  <strings>
+    <string id="Ff59cH4f" text="年龄成长系统" />
+    <string id="t7P6z2aQ" text="怀孕系统设置" />
+    
+    <string id="sNMtk43F" text="孩子成为战斗英雄的年龄" />
+    <string id="ExJ1wdfd" text="设置卡拉迪亚大陆的孩子在几岁成为一个可以为家族而战的英雄，建议设置的值大于14，不然有些NPC将会以小孩的形式出现" />
+      
+    <string id="GHqMmr55" text="所有人物的最大年龄" />
+    <string id="Z4e9stqr" text="注意，卡拉迪亚大陆所有的NPC以及玩家的角色将在达到您设置的最大年龄后死亡" />
+      
+    <string id="ISDCqOXS" text="设置主角的孩子多少天长大一岁" />
+    <string id="1stHpPnB" text="每过您设置的天数，您的孩子都会成长一岁。原版中，一年有84天" />
+
+    <string id="rzeuOFBk" text="启用NPC的孩子更快地生长" />
+    <string id="y5fvV0vl" text="启用后，所有NPC的孩子也会和您的孩子一样长得飞快" />
+
+    <string id="QEHZzYvW" text="设置停止飞速增长的年龄" />
+    <string id="M4cE1DxI" text="当达到设置的年龄后，你的孩子将会返回正常的生长速率(一年涨一岁)" />
+
+    <string id="FHdF0H2k" text="设置孕期" />
+    <string id="c5V1OXKn" text="一个女性角色怀孕多少天后可以生下孩子, 原版的设置值是36天。最大可以设置到80" />
+
+    <string id="n2sy7FxF" text="开启无难产模式" />
+    <string id="IMb7ESZb" text="如果开启，卡拉迪亚的所有女性角色都不会死于难产。原版中女性角色有可能死于难产" />
+      
+    <string id="cYZ8Vsfu" text="死胎(小产)概率" />
+    <string id="5vUseYr9" text="设置卡拉迪亚大陆所有孩子在出生过程中死胎(小产)的概率。设置为0将不会发生死胎，设置为1.0您的孩子会全部死于小产. 原版值为0.01" />
+
+    <string id="fOCA7c4O" text="最大怀孕年龄" />
+    <string id="SGTv7OWL" text="设置游戏中女性角色在多少岁后不再有能力怀孕, 原版中45岁之后女性角色将绝经失去怀孕能力" />
+
+    <string id="IA36Xmzq" text="最小怀孕年龄" />
+    <string id="219pBKJa" text="设置女性角色至少要达到多少岁才会怀孕，原版中女性要达到18岁才可以怀孕" />
+
+    <string id="HTI4MLDx" text="主角家族女性的怀孕几率" />
+    <string id="XTumVh4r" text="设置主角家族中女性的怀孕概率, 设置为0将不会怀孕, 设置为1.0您家族的女性只要有机会就会怀孕. 原版的值为0.95" />
+
+
+  </strings>
+</base>
